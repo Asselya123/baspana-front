@@ -1,12 +1,34 @@
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
-import { Breadcrumb, Button, Empty, Segmented, Typography } from "antd";
+import {
+  ArrowLeftOutlined,
+  ArrowRightOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
+import { Breadcrumb, Button, Input, Segmented, Table, Typography } from "antd";
 import { FC, useState } from "react";
 
 const { Title } = Typography;
 
-interface ApplicationFormPageProps {}
+interface ApplicationListPageProps {}
 
-export const ApplicationFormPage: FC<ApplicationFormPageProps> = ({}) => {
+const columns = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+    key: "age",
+  },
+  {
+    title: "Address",
+    dataIndex: "address",
+    key: "address",
+  },
+];
+
+export const ApplicationListPage: FC<ApplicationListPageProps> = ({}) => {
   const [activeTab, setActiveTab] = useState<string>("start");
   return (
     <div>
@@ -31,13 +53,10 @@ export const ApplicationFormPage: FC<ApplicationFormPageProps> = ({}) => {
         onChange={(value) => setActiveTab(value)}
         options={["start", "center", "end"]}
       />
-      <Empty />
-      <div className="flex justify-center">
-        <Button type="primary" size="large">
-          Подать заявку
-        </Button>
+      <div className="between flex">
+        <Input prefix={<SearchOutlined />} />
       </div>
-      {/* <AuthorSelectModal /> */}
+      <Table dataSource={[]} columns={columns} pagination={{ pageSize: 10 }} />
     </div>
   );
 };
