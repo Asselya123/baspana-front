@@ -3,6 +3,7 @@ import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { FC } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { Header } from "@/components/Header";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -25,10 +26,13 @@ export const PersonalCabinetLayout: FC<PersonalCabinetLayoutProps> = ({}) => {
     },
   ];
   return (
-    <div className="flex">
-      <Menu mode="vertical" items={items} />
-      <div className="flex-1">
-        <Outlet />
+    <div>
+      <Header />
+      <div className="flex">
+        <Menu mode="vertical" items={items} />
+        <div className="flex-1">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
