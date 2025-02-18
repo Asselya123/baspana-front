@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
+import { LandingPage } from "../shared/pages/LandingPage";
 import { ApplicationFormPage } from "./pages/ApplicationFormPage";
 import { ApplicationListPage } from "./pages/ApplicationListPage";
 import { ApplicationSignPage } from "./pages/ApplicationSignPage";
@@ -15,6 +16,7 @@ export const ApplicationRoutes: FC<ApplicationRoutesProps> = ({}) => {
         <Route path="/sign" element={<ApplicationSignPage />} />
         <Route path="/applications" element={<ApplicationListPage />} />
       </Route>
+      <Route path="/landing" element={<LandingPage />} />
     </Routes>
   );
 };
