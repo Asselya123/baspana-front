@@ -65,7 +65,7 @@ export const Header = () => {
             <img src={LogoIcon} alt="logo" />
             {links.map((link) => (
               <div key={link.label}>
-                <Link className="text-black" to={link.href}>
+                <Link className="!text-black" to={link.href}>
                   {link.label}
                 </Link>
               </div>
