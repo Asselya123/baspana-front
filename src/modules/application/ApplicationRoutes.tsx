@@ -5,6 +5,7 @@ import { LandingPage } from "../shared/pages/LandingPage";
 import { ApplicationFormPage } from "./pages/ApplicationFormPage";
 import { ApplicationListPage } from "./pages/ApplicationListPage";
 import { ApplicationSignPage } from "./pages/ApplicationSignPage";
+import { OperationsPage } from "./pages/OperationsPage";
 import { PersonalCabinetLayout } from "./pages/PersonalCabinet";
 import { ProfilePage } from "./pages/ProfilePage";
 
@@ -18,6 +19,7 @@ export const ApplicationRoutes: FC<ApplicationRoutesProps> = ({}) => {
         <Route path="/sign" element={<ApplicationSignPage />} />
         <Route path="/applications" element={<ApplicationListPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/operations" element={<OperationsPage />} />
       </Route>
       <Route path="/landing" element={<LandingPage />} />
       <Route path="/apartments/:id" element={<ApartmentDetailsPage />} />
