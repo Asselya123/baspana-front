@@ -3,15 +3,6 @@ import Preview from "@/assets/preview.webp";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
-const contentStyle: React.CSSProperties = {
-  margin: 0,
-  height: "160px",
-  color: "#fff",
-  lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
-};
-
 const info = [
   {
     title: "Код объекта”",
@@ -35,6 +26,76 @@ const info = [
   },
   {
     title: "Завершение строительства",
+    value: "31.03.2022",
+  },
+];
+
+const ProgramLabel = ({ label }: { label: string }) => {
+  return (
+    <div className="flex items-center justify-center gap-2 rounded-full border border-[#008F91] bg-[#E7F5EE] px-4 py-1">
+      <span className="text-sm">{label}</span>
+    </div>
+  );
+};
+const AVAILABLE_PROGRAMS = [
+  {
+    label: "Нурлы жер",
+  },
+];
+const ConditionLabel = ({ label }: { label: string }) => {
+  return (
+    <div className="flex items-center justify-center gap-2 rounded-full border border-[#D1D4D7] bg-[#EBEFF1] px-4 py-1">
+      <span className="whitespace-nowrap text-sm">{label}</span>
+    </div>
+  );
+};
+const CONDITIONS = [
+  { label: "Дети-сироты и дети, оставшиеся без попечения родителей" },
+  { label: "Неполные семьи" },
+  { label: "Лица с инвалидностью I и II группы" },
+  { label: "В семье ребенок с ограниченными возможностями" },
+  { label: "Многодетная семья" },
+];
+
+const CommonInfoBlock = ({
+  propertyName,
+  value,
+}: {
+  propertyName: string;
+  value: string;
+}) => {
+  return (
+    <div className="flex items-center justify-between gap-1">
+      <p className="text-sm text-[#7A7E81]">{propertyName}</p>
+      <div className="h-full grow border-b border-dotted border-[#ADB0B2]"></div>
+      <p className="text-sm font-medium text-[#333839]">{value}</p>
+    </div>
+  );
+};
+
+const COMMON_INFO = [
+  {
+    propertyName: "Код объекта",
+    value: "1610",
+  },
+  {
+    propertyName: "Этажность",
+    value: "5",
+  },
+  {
+    propertyName: "Зданий",
+    value: "1",
+  },
+  {
+    propertyName: "Материал",
+    value: "Панельный",
+  },
+  {
+    propertyName: "Начало строительства",
+    value: "23.03.2020",
+  },
+  {
+    propertyName: "Завершение строительства",
     value: "31.03.2022",
   },
 ];
@@ -73,7 +134,7 @@ export const ApartmentDetailsPage = () => {
               <span className="text-[#7A7E81]">200 просмотров</span>
             </div>
           </div>
-          <div>
+          <div className="max-w-2xl">
             <Carousel className="max-w-2xl">
               <div>
                 <img src={Preview} alt="" />
@@ -82,13 +143,62 @@ export const ApartmentDetailsPage = () => {
                 <img src={Preview} alt="" />
               </div>
             </Carousel>
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               {info.map((item) => (
-                <div key={item.title}>
+                <div
+                  key={item.title}
+                  className="flex flex-col items-center gap-2"
+                >
                   <p>{item.title}</p>
                   <p>{item.value}</p>
                 </div>
               ))}
+            </div>
+            <div className="border-y border-[#D1D4D7] py-4">
+              <Typography.Title level={3}>Доступные программы</Typography.Title>
+              <div className="flex flex-wrap gap-2">
+                {AVAILABLE_PROGRAMS.map((program) => (
+                  <ProgramLabel key={program.label} label={program.label} />
+                ))}
+              </div>
+            </div>
+            <div className="border-b border-[#D1D4D7] py-4">
+              <Typography.Title level={3}>Условия участия</Typography.Title>
+              <Typography.Paragraph>
+                По данному объекту в конкурсе могут участвовать только следующие
+                категории:
+              </Typography.Paragraph>
+              <div className="flex flex-wrap gap-2">
+                {CONDITIONS.map((condition) => (
+                  <ConditionLabel
+                    key={condition.label}
+                    label={condition.label}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="border-b border-[#D1D4D7] py-4">
+              <Typography.Title level={3}>Описание</Typography.Title>
+              <Typography.Paragraph>
+                В составе квартир предусматриваются жилые комнаты, кухни,
+                санузлы, балконы. Фундаменты – монолитные железобетонные, стены
+                тех подполья - железобетонные монолитные. Наружные стены и
+                перегородки – сборные трехслойные наружные стеновые несущие
+                панели, перекрытия – сборные железобетонные панели, лестницы -
+                монолитные железобетонные.
+              </Typography.Paragraph>
+            </div>
+            <div className="border-b border-[#D1D4D7] py-4">
+              <Typography.Title level={4}>Общая информация</Typography.Title>
+              <div className="grid grid-cols-2 gap-x-10 gap-y-5">
+                {COMMON_INFO.map((item) => (
+                  <CommonInfoBlock
+                    key={item.propertyName}
+                    propertyName={item.propertyName}
+                    value={item.value}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
