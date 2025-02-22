@@ -27,12 +27,12 @@ export const PersonalCabinetLayout: FC<PersonalCabinetLayoutProps> = ({}) => {
     },
   ];
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex h-screen flex-col">
       <Header />
-      <div className="flex justify-center grow">
+      <div className="flex grow justify-center">
         <div className="flex w-full max-w-7xl">
           <Menu mode="vertical" items={items} style={{ width: 272 }} />
-          <div className="flex-1">
+          <div className="flex-1 bg-[#F6F7F8] px-8 py-9">
             <Outlet />
           </div>
         </div>
