@@ -1,6 +1,7 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import { Breadcrumb, Button, Empty, Segmented, Typography } from "antd";
 import { FC, useState } from "react";
+import { AuthorSelectModal } from "../components/AuthorSelectModal";
 
 const { Title } = Typography;
 
@@ -37,7 +38,7 @@ export const ApplicationFormPage: FC<ApplicationFormPageProps> = ({}) => {
           Подать заявку
         </Button>
       </div>
-      {/* <AuthorSelectModal /> */}
+      <AuthorSelectModal />
     </div>
   );
 };
