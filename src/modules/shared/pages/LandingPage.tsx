@@ -1,7 +1,12 @@
-import { FC } from "react";
+import { Typography } from "antd";
+import { FC, ReactNode } from "react";
+import BannerImage from "@/assets/banner.webp";
 import Icon0 from "@/assets/icon-0.png";
 import Icon1 from "@/assets/icon-1.png";
 import Icon2 from "@/assets/icon-2.png";
+import ProgramImage1 from "@/assets/program1.png";
+import ProgramImage2 from "@/assets/program2.png";
+import ProgramImage3 from "@/assets/program3.png";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
@@ -19,28 +24,11 @@ const LinkCard = ({
 }) => {
   return (
     <div
-      className={`relative flex h-[200px] w-[400px] justify-between rounded-3xl p-5 ${className}`}
+      className={`relative flex h-[180px] w-[300px] justify-between rounded-3xl p-5 ${className}`}
     >
       <div className="self-center">{title}</div>
-      <div className="absolute bottom-[40px] right-[40px] h-[100px] w-[100px]">
+      <div className="absolute bottom-[15px] right-[15px] h-[100px] w-[100px]">
         <img src={iconSrc} />
-      </div>
-      <div className="flex h-max w-max items-center justify-center self-end rounded-full bg-[rgba(0,0,0,0.22)] p-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <path
-            d="M10 17L15 12L10 7"
-            stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
       </div>
     </div>
   );
@@ -81,17 +69,72 @@ const links = [
   },
 ];
 
+const programs = [
+  {
+    title: "Бақытты Отбасы",
+    percent: "10%",
+    image: <img src={ProgramImage1} />,
+  },
+  {
+    title: "Әскери Баспана",
+    percent: "10%",
+    image: <img src={ProgramImage2} />,
+  },
+  {
+    title: "Женская Ипотека «ҰМАЙ»",
+    percent: "10%",
+    image: <img src={ProgramImage3} />,
+  },
+];
+
+const ProgramCard = ({
+  title,
+  percent,
+  image,
+}: {
+  title: ReactNode;
+  percent: string;
+  image: ReactNode;
+}) => {
+  return (
+    <div
+      className={`relative flex h-[180px] w-[300px] flex-col justify-between rounded-3xl bg-white p-5`}
+    >
+      <div className="relative z-10 max-w-[150px] text-xl font-semibold">
+        {title}
+      </div>
+      <div className="relative z-10 text-sm text-gray-500">
+        Ставка от <br />{" "}
+        <span className="font-semibold text-black">{percent}</span>
+      </div>
+      <div className="absolute bottom-0 right-0 w-[70%]"> {image}</div>
+    </div>
+  );
+};
+
 export const LandingPage: FC<LandingPageProps> = ({}) => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col">
       <Header />
-      <div className="flex justify-center grow">
-        <div className="flex w-full max-w-7xl">
-          <div className="flex items-center justify-between gap-4">
+      <div className="grow bg-[#F6F7F8]">
+        <div className="mx-auto max-w-[1024px] px-10 py-10">
+          <div className="flex items-center justify-center w-full gap-4">
             {links.map((link) => (
               <LinkCard key={link.href} {...link} />
             ))}
           </div>
+
+          <div className="py-10">
+            <Typography.Title level={3} className="text-center">
+              Наши программы
+            </Typography.Title>
+            <div className="flex items-center justify-center w-full gap-4 mt-10">
+              {programs.map((program) => (
+                <ProgramCard key={program.title} {...program} />
+              ))}
+            </div>
+          </div>
+          <img src={BannerImage} alt="" className="w-full" />
         </div>
       </div>
       <Footer />

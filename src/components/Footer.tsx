@@ -174,15 +174,15 @@ const BaiterekLogo = () => (
 export const Footer = () => {
   return (
     <footer className="flex flex-col items-center">
-      <div className="flex justify-between w-full px-10 py-5">
+      <div className="flex w-full max-w-[1024px] justify-between px-10 py-5">
         <div className="flex gap-20">
           <MobileAppLinks />
           <LinkGroup title="Baspana" links={aboutLinks} />
         </div>
         <Contacts />
       </div>
-      <div className="flex w-full items-center justify-center border-t border-[#D1D4D7] px-10 py-5">
-        <div className="flex items-center justify-between w-full gap-2">
+      <div className="flex w-full items-center justify-center border-t border-[#D1D4D7] py-5">
+        <div className="mx-auto flex w-full max-w-[1024px] items-center justify-between gap-2 px-10">
           <div className="flex items-center gap-8">
             © 2024 АО «Отбасы банк»
           </div>
