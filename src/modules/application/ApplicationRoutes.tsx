@@ -14,14 +14,15 @@ interface ApplicationRoutesProps {}
 export const ApplicationRoutes: FC<ApplicationRoutesProps> = ({}) => {
   return (
     <Routes>
+      <Route path="/" element={<LandingPage />} />
       <Route element={<PersonalCabinetLayout />}>
-        <Route path="/" element={<ApplicationFormPage />} />
+        <Route path="/form" element={<ApplicationFormPage />} />
         <Route path="/sign" element={<ApplicationSignPage />} />
         <Route path="/applications" element={<ApplicationListPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/operations" element={<OperationsPage />} />
       </Route>
-      <Route path="/landing" element={<LandingPage />} />
+
       <Route path="/apartments/:id" element={<ApartmentDetailsPage />} />
     </Routes>
   );

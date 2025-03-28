@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
 import Icon0 from "@/assets/icon-0.png";
 import Icon1 from "@/assets/icon-1.png";
 import Icon2 from "@/assets/icon-2.png";
@@ -83,12 +82,10 @@ const links = [
 ];
 
 export const LandingPage: FC<LandingPageProps> = ({}) => {
-  const navigate = useNavigate();
-
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex flex-col h-screen">
       <Header />
-      <div className="flex grow justify-center">
+      <div className="flex justify-center grow">
         <div className="flex w-full max-w-7xl">
           <div className="flex items-center justify-between gap-4">
             {links.map((link) => (

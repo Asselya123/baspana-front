@@ -1,9 +1,11 @@
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
+import { Header } from "@/components/Header";
 import { login } from "../../../api";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+
   const onFinish = async (values: any) => {
     const response = await login(values);
     localStorage.setItem("token", response.access);
@@ -12,10 +14,10 @@ export default function LoginPage() {
 
   return (
     <div>
-      LoginPage
+      <Header />
       <div className="flex justify-center">
-        <div>
-          <Typography.Title level={2}>
+        <div className="py-10">
+          <Typography.Title level={3}>
             Войти или зарегистрироваться
           </Typography.Title>
           <Form layout="vertical" onFinish={onFinish}>
