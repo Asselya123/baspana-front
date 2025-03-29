@@ -1,21 +1,21 @@
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { login } from "../../../api";
 
 export default function LoginPage() {
   const navigate = useNavigate();
 
   const onFinish = async (values: any) => {
-    const response = await login(values);
-    localStorage.setItem("token", response.access);
-    navigate("/");
+    // const response = await login(values);
+    // localStorage.setItem("token", response.access);
+    navigate("/profile");
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex justify-center">
+      <div className="flex justify-center grow">
         <div className="py-10">
           <Typography.Title level={3}>
             Войти или зарегистрироваться
@@ -35,6 +35,7 @@ export default function LoginPage() {
           </Form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

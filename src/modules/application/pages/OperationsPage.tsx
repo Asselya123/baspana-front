@@ -24,13 +24,14 @@ const OperationCard = ({
   icon: React.ReactNode;
 }) => {
   return (
-    <div className="flex items-center gap-2 rounded-xl bg-white p-5">
+    <div className="flex items-center gap-2 p-5 bg-white rounded-xl">
       {icon}
-      <p className="grow text-sm">{title}</p>
+      <p className="text-sm grow">{title}</p>
       <RightOutlined />
     </div>
   );
 };
+
 export const OperationsPage = () => {
   return (
     <div>

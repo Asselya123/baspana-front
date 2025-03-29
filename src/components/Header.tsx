@@ -62,7 +62,7 @@ export const Header = () => {
   const [isAuth, setIsAuth] = useState(false);
   return (
     <header className="flex flex-col items-center">
-      <div className="mx-auto flex w-full max-w-[1024px] items-center justify-between gap-2 px-10 pb-2 pt-4">
+      <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-2 px-10 pb-2 pt-4">
         <div className="flex items-center gap-8">
           <div className="flex items-center gap-2 text-[#7A7E81]">
             <PointIcon />
@@ -83,7 +83,7 @@ export const Header = () => {
         </div>
       </div>
       <div className="flex w-full items-center justify-center border-b border-t border-[#D1D4D7]">
-        <div className="mx-auto flex w-full max-w-[1024px] items-center justify-between gap-2 px-10 py-3">
+        <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-2 px-10 py-3">
           <div className="flex items-center gap-8">
             <img src={LogoIcon} alt="logo" />
             {links.map((link) => (
@@ -95,7 +95,7 @@ export const Header = () => {
             ))}
           </div>
           <div>
-            {!isAuth ? (
+            {isAuth ? (
               <Link
                 to="/profile"
                 className="flex items-center gap-2 !text-[#008F91]"
