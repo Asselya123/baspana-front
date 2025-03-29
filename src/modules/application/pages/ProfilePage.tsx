@@ -7,7 +7,6 @@ const AppartmentCard = ({
   price,
   label,
   image,
-  isLiked,
 }: {
   title: string;
   price: JSX.Element | string;
@@ -18,11 +17,11 @@ const AppartmentCard = ({
   return (
     <div className="overflow-hidden rounded-xl">
       <div className="relative">
-        <img src={image} alt={title} className="w-full object-cover" />
+        <img src={image} alt={title} className="object-cover w-full" />
         <div className="absolute right-4 top-4">
           <Button icon={<HeartOutlined />} />
         </div>
-        <div className="absolute left-4 top-4 rounded-2xl bg-white px-4 py-1 text-xs">
+        <div className="absolute px-4 py-1 text-xs bg-white left-4 top-4 rounded-2xl">
           {label}
         </div>
       </div>
@@ -70,9 +69,9 @@ const APPARTMENT_PREVIEW_LIST = [
 export const ProfilePage = () => {
   return (
     <>
-      <div className="flex gap-8 rounded-xl bg-white p-5">
+      <div className="flex gap-8 p-5 bg-white rounded-xl">
         <div
-          className="flex flex-col items-center justify-center rounded-xl px-8 py-5"
+          className="flex flex-col items-center justify-center px-8 py-5 rounded-xl"
           style={{
             background:
               "linear-gradient(141deg, #008F91 15.18%, #003D3E 86.41%)",
@@ -95,9 +94,9 @@ export const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-5 rounded-xl bg-white p-5">
+      <div className="flex flex-col gap-5 p-5 bg-white rounded-xl">
         <div
-          className="flex gap-5 rounded-xl px-8 py-5"
+          className="flex gap-5 px-8 py-5 rounded-xl"
           style={{
             background:
               "linear-gradient(262deg, #DBFBDA 5.93%, #D1EEFF 68.26%)",

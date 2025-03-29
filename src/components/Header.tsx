@@ -59,7 +59,7 @@ const UserIcon = () => (
 );
 
 export const Header = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth] = useState(false);
   return (
     <header className="flex flex-col items-center">
       <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-2 px-10 pb-2 pt-4">

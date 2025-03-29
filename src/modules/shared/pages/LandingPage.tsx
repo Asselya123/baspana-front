@@ -7,8 +7,7 @@ import Icon2 from "@/assets/icon-2.png";
 import ProgramImage1 from "@/assets/program1.png";
 import ProgramImage2 from "@/assets/program2.png";
 import ProgramImage3 from "@/assets/program3.png";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { Layout } from "@/components/Layout";
 
 interface LandingPageProps {}
 
@@ -114,10 +113,9 @@ const ProgramCard = ({
 
 export const LandingPage: FC<LandingPageProps> = ({}) => {
   return (
-    <div className="flex flex-col">
-      <Header />
+    <Layout>
       <div className="grow bg-[#F6F7F8]">
-        <div className="mx-auto max-w-[1024px] px-10 py-10">
+        <div className="mx-auto max-w-[1280px] px-10 py-10">
           <div className="flex items-center justify-center w-full gap-4">
             {links.map((link) => (
               <LinkCard key={link.href} {...link} />
@@ -137,7 +135,6 @@ export const LandingPage: FC<LandingPageProps> = ({}) => {
           <img src={BannerImage} alt="" className="w-full" />
         </div>
       </div>
-      <Footer />
-    </div>
+    </Layout>
   );
 };
