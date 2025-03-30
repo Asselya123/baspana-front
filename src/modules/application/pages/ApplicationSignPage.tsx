@@ -4,6 +4,7 @@ import { FC, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { ApplicationTemplate } from "../components/ApplicationTemplate";
+import { ConfirmationWait } from "../components/ConfirmationWait";
 import { DocumentUpload } from "../components/DocumentUpload";
 import { MockEspModal } from "../components/MockEspModal";
 
@@ -46,9 +47,14 @@ export const ApplicationSignPage: FC<ApplicationSignPageProps> = ({}) => {
           <ApplicationTemplate onSubmit={() => setOpenMockEspModal(true)} />
         </>
       ) : step === 2 ? (
-        <DocumentUpload onSubmit={() => setStep(3)} />
+        <DocumentUpload
+          onSubmit={() => {
+            setStep(3);
+            navigate(`${location.pathname}?step=3`, { replace: true });
+          }}
+        />
       ) : (
-        <></>
+        <ConfirmationWait onSubmit={() => setStep(3)} />
       )}
     </Layout>
   );
