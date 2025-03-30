@@ -45,7 +45,7 @@ const AVAILABLE_PROGRAMS = [
 const ConditionLabel = ({ label }: { label: string }) => {
   return (
     <div className="flex items-center justify-center gap-2 rounded-full border border-[#D1D4D7] bg-[#EBEFF1] px-4 py-1">
-      <span className="whitespace-nowrap text-sm">{label}</span>
+      <span className="text-sm whitespace-nowrap">{label}</span>
     </div>
   );
 };
@@ -101,18 +101,18 @@ const COMMON_INFO = [
 ];
 export const ApartmentDetailsPage = () => {
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex flex-col h-screen">
       <Header />
-      <div className="flex w-full grow justify-center">
-        <div className="flex w-full max-w-7xl flex-col">
-          <div className="flex w-full justify-between">
+      <div className="flex justify-center w-full grow">
+        <div className="flex flex-col w-full max-w-7xl">
+          <div className="flex justify-between w-full">
             <div>
               <Typography.Title level={3}>ЖК “Жас Канат”</Typography.Title>
               <p className="text-[#7A7E81]">
                 Казахстан, Жамбылская область, Тараз, 15-й микрорайон
               </p>
             </div>
-            <div className="flex h-max items-center gap-2">
+            <div className="flex items-center gap-2 h-max">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -121,8 +121,8 @@ export const ApartmentDetailsPage = () => {
                 fill="none"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M14.6673 8.00016C14.6673 8.66683 12.0007 12.6668 8.00065 12.6668C4.00065 12.6668 1.33398 8.66683 1.33398 8.00016C1.33398 7.3335 4.00065 3.3335 8.00065 3.3335C12.0007 3.3335 14.6673 7.3335 14.6673 8.00016ZM8.00065 5.3335C9.47341 5.3335 10.6673 6.5274 10.6673 8.00016C10.6673 9.47292 9.47341 10.6668 8.00065 10.6668C6.52789 10.6668 5.33398 9.47292 5.33398 8.00016C5.33398 6.5274 6.52789 5.3335 8.00065 5.3335Z"
                   fill="#7A7E81"
                 />
