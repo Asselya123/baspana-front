@@ -1,7 +1,7 @@
 import { Carousel, Typography } from "antd";
 import Preview from "@/assets/preview.webp";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { GoBack } from "@/components/GoBack";
+import { Layout } from "@/components/Layout";
 
 const info = [
   {
@@ -101,11 +101,11 @@ const COMMON_INFO = [
 ];
 export const ApartmentDetailsPage = () => {
   return (
-    <div className="flex flex-col h-screen">
-      <Header />
-      <div className="flex justify-center w-full grow">
-        <div className="flex flex-col w-full max-w-7xl">
-          <div className="flex justify-between w-full">
+    <Layout>
+      <GoBack />
+      <div className="flex justify-center w-full mt-5 grow">
+        <div className="flex flex-col w-full">
+          <div className="flex justify-between w-full mb-4">
             <div>
               <Typography.Title level={3}>ЖК “Жас Канат”</Typography.Title>
               <p className="text-[#7A7E81]">
@@ -134,8 +134,8 @@ export const ApartmentDetailsPage = () => {
               <span className="text-[#7A7E81]">200 просмотров</span>
             </div>
           </div>
-          <div className="max-w-2xl">
-            <Carousel className="max-w-2xl">
+          <div className="max-w-[800px]">
+            <Carousel className="max-w-[800px]">
               <div>
                 <img src={Preview} alt="" />
               </div>
@@ -143,7 +143,7 @@ export const ApartmentDetailsPage = () => {
                 <img src={Preview} alt="" />
               </div>
             </Carousel>
-            <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 py-5">
               {info.map((item) => (
                 <div
                   key={item.title}
@@ -203,7 +203,6 @@ export const ApartmentDetailsPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
+    </Layout>
   );
 };

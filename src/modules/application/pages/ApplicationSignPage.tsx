@@ -1,7 +1,7 @@
-import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 import { FC, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { GoBack } from "@/components/GoBack";
 import { Layout } from "@/components/Layout";
 import { ApplicationResult } from "../components/ApplicationResult";
 import { ApplicationTemplate } from "../components/ApplicationTemplate";
@@ -30,10 +30,7 @@ export const ApplicationSignPage: FC<ApplicationSignPageProps> = ({}) => {
 
   return (
     <Layout className="bg-[#F6F7F8]">
-      <div className="flex items-center gap-2 mt-5">
-        <ArrowLeftOutlined className="text-sm font-medium text-gray-500" />
-        <span className="text-base font-medium text-gray-500">Назад</span>
-      </div>
+      <GoBack />
       <Title level={4} className="mt-2">
         Постановка на учет
       </Title>

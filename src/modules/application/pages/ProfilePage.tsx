@@ -112,7 +112,7 @@ export const ProfilePage = () => {
             </Typography.Paragraph>
             <Button color="primary">Подробнее </Button>
           </div>
-          <Button>
+          <Button href="/apartments/5">
             <div className="flex items-center justify-center gap-1">
               Показать все объекты
               <RightOutlined />
