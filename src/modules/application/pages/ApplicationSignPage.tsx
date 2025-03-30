@@ -3,6 +3,7 @@ import { Typography } from "antd";
 import { FC, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Layout } from "@/components/Layout";
+import { ApplicationResult } from "../components/ApplicationResult";
 import { ApplicationTemplate } from "../components/ApplicationTemplate";
 import { ConfirmationWait } from "../components/ConfirmationWait";
 import { DocumentUpload } from "../components/DocumentUpload";
@@ -53,8 +54,15 @@ export const ApplicationSignPage: FC<ApplicationSignPageProps> = ({}) => {
             navigate(`${location.pathname}?step=3`, { replace: true });
           }}
         />
+      ) : step === 3 ? (
+        <ConfirmationWait
+          onSubmit={() => {
+            setStep(4);
+            navigate(`${location.pathname}?step=4`, { replace: true });
+          }}
+        />
       ) : (
-        <ConfirmationWait onSubmit={() => setStep(3)} />
+        <ApplicationResult onSubmit={() => navigate("/")} />
       )}
     </Layout>
   );
