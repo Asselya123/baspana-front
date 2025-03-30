@@ -1,7 +1,7 @@
 import { BellFilled, HomeOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LogoIcon from "../assets/logo.svg";
 
 const links = [
@@ -58,8 +58,22 @@ const UserIcon = () => (
   </svg>
 );
 
+function getIsAuth(path: string) {
+  let isAuth = false;
+  ["/sign", "/profile", "/operations", "/applications", "/apartments"].forEach(
+    (p) => {
+      if (path.includes(p)) {
+        isAuth = true;
+      }
+    },
+  );
+  return isAuth;
+}
+
 export const Header = () => {
-  const [isAuth] = useState(false);
+  const location = useLocation();
+  const [isAuth] = useState(getIsAuth(location.pathname));
+
   return (
     <header className="flex flex-col items-center">
       <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-2 px-10 pb-2 pt-4">
@@ -85,7 +99,9 @@ export const Header = () => {
       <div className="flex w-full items-center justify-center border-b border-t border-[#D1D4D7]">
         <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-2 px-10 py-3">
           <div className="flex items-center gap-8">
-            <img src={LogoIcon} alt="logo" />
+            <Link to="/">
+              <img src={LogoIcon} alt="logo" />
+            </Link>
             {links.map((link) => (
               <div key={link.label}>
                 <Link className="!text-black" to={link.href}>

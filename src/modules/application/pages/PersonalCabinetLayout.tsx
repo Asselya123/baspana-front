@@ -5,7 +5,7 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -38,12 +38,16 @@ export const PersonalCabinetLayout: FC<PersonalCabinetLayoutProps> = ({}) => {
   ];
   const { pathname } = useLocation();
 
-  let defaultSelectedKey: string = items[0]?.key?.toString() ?? "";
-  items.forEach((item) => {
-    if (typeof item?.key === "string" && pathname.includes(item?.key)) {
-      defaultSelectedKey = item?.key;
-    }
-  });
+  const [defaultSelectedKey, setDefaultSelectedKey] = useState<string[]>([
+    items[0]?.key?.toString() ?? "",
+  ]);
+  useEffect(() => {
+    items.forEach((item) => {
+      if (typeof item?.key === "string" && pathname.includes(item?.key)) {
+        setDefaultSelectedKey([item?.key]);
+      }
+    });
+  }, [pathname]);
 
   return (
     <div className="flex flex-col h-screen">
@@ -55,7 +59,8 @@ export const PersonalCabinetLayout: FC<PersonalCabinetLayoutProps> = ({}) => {
             items={items}
             style={{ width: 272 }}
             className="min-w-[272px]"
-            defaultSelectedKeys={[defaultSelectedKey]}
+            selectedKeys={defaultSelectedKey}
+            defaultSelectedKeys={defaultSelectedKey}
           />
           <div className="grow bg-[#F6F7F8] px-8 py-9">
             <Outlet />

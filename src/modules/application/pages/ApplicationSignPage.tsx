@@ -15,7 +15,7 @@ const getStep = (search: string) => {
   const step = new URLSearchParams(search).get("step");
   if (Number.isNaN(Number(step))) return 1;
   if (Number(step) < 1) return 1;
-  if (Number(step) > 3) return 3;
+
   return Number(step);
 };
 
@@ -26,6 +26,8 @@ export const ApplicationSignPage: FC<ApplicationSignPageProps> = ({}) => {
   const location = useLocation();
   const [step, setStep] = useState(getStep(location.search));
   const navigate = useNavigate();
+  console.log(step);
+
   return (
     <Layout className="bg-[#F6F7F8]">
       <div className="flex items-center gap-2 mt-5">

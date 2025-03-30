@@ -121,8 +121,8 @@ export const ProfilePage = () => {
         </div>
         <div>
           <div className="flex justify-between gap-5">
-            {APPARTMENT_PREVIEW_LIST.map((item) => (
-              <AppartmentCard key={item.label} {...item} isLiked={false} />
+            {APPARTMENT_PREVIEW_LIST.map((item, index) => (
+              <AppartmentCard key={index} {...item} isLiked={false} />
             ))}
           </div>
         </div>
