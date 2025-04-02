@@ -25,3 +25,16 @@ class ApartmentSerializer(serializers.ModelSerializer):
                  'description', 'has_balcony', 'is_balcony_glazed', 'building_start_date',
                  'home_type', 'bathroom_type', 'security', 'parking_type', 'elevator_type',
                  'apartment_types', 'builder', 'builder_id']
+
+class FileUploadSerializer(serializers.ModelSerializer):
+    file_url = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = UploadedFile
+        fields = ['id', 'file', 'uploaded_at', 'file_url']
+        read_only_fields = ['uploaded_at', 'file_url']
+    
+    def get_file_url(self, obj):
+        request = self.context.get('request')
+        file_url = obj.file.url
+        return request.build_absolute_uri(file_url) if request else file_url
