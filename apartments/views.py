@@ -10,6 +10,11 @@ from .serializers import ApartmentSerializer, BuilderSerializer, LoginSerializer
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login_view(request):
+    """
+    Аутентификация пользователя.
+    
+    Принимает имя пользователя и пароль, возвращает JWT токен доступа.
+    """
     serializer = LoginSerializer(data=request.data)
     if serializer.is_valid():
         username = serializer.validated_data.get('username')
@@ -21,20 +26,35 @@ def login_view(request):
             return Response({
                 'access': str(refresh.access_token),
             })
-        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'error': 'Неверные учетные данные'}, status=status.HTTP_401_UNAUTHORIZED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class BuilderViewSet(viewsets.ModelViewSet):
+    """
+    API для работы с застройщиками.
+    
+    Предоставляет операции CRUD для данных застройщиков.
+    """
     queryset = Builder.objects.all()
     serializer_class = BuilderSerializer
     permission_classes = [IsAuthenticated]
 
 class ApartmentViewSet(viewsets.ModelViewSet):
+    """
+    API для работы с квартирами.
+    
+    Предоставляет операции CRUD для данных о квартирах.
+    """
     queryset = Apartment.objects.all()
     serializer_class = ApartmentSerializer
     permission_classes = [IsAuthenticated]
 
 class FileUploadViewSet(viewsets.ModelViewSet):
+    """
+    API для работы с загруженными файлами.
+    
+    Предоставляет операции CRUD для загруженных файлов.
+    """
     queryset = UploadedFile.objects.all()
     serializer_class = FileUploadSerializer
     parser_classes = [parsers.MultiPartParser, parsers.FormParser]
@@ -49,10 +69,13 @@ class FileUploadViewSet(viewsets.ModelViewSet):
 @parser_classes([parsers.MultiPartParser, parsers.FormParser])
 def upload_file(request):
     """
-    Upload a file and return its server path.
+    Загрузка файла.
+    
+    Загружает файл на сервер и возвращает URL и путь к файлу на сервере.
+    Для загрузки используйте multipart/form-data с полем 'file'.
     """
     if 'file' not in request.FILES:
-        return Response({'error': 'No file was submitted'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Файл не был отправлен'}, status=status.HTTP_400_BAD_REQUEST)
     
     serializer = FileUploadSerializer(data=request.data, context={'request': request})
     if serializer.is_valid():

@@ -8,22 +8,32 @@ def upload_path(instance, filename):
     return os.path.join('uploads', filename)
 
 class UploadedFile(models.Model):
-    file = models.FileField(upload_to=upload_path)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
+    file = models.FileField(upload_to=upload_path, verbose_name="Файл")
+    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата загрузки")
     
     def __str__(self):
         return os.path.basename(self.file.name)
+        
+    class Meta:
+        verbose_name = "Загруженный файл"
+        verbose_name_plural = "Загруженные файлы"
+        ordering = ['-uploaded_at']
 
 class Builder(models.Model):
-    icon = models.URLField(blank=True)
-    name = models.CharField(max_length=255)
-    contacts = models.TextField()
-    phone_number = models.CharField(max_length=20)
-    site = models.URLField(blank=True)
-    email = models.EmailField()
+    icon = models.URLField(blank=True, verbose_name="Иконка")
+    name = models.CharField(max_length=255, verbose_name="Название")
+    contacts = models.TextField(verbose_name="Контакты")
+    phone_number = models.CharField(max_length=20, verbose_name="Номер телефона")
+    site = models.URLField(blank=True, verbose_name="Веб-сайт")
+    email = models.EmailField(verbose_name="Email")
 
     def __str__(self):
         return self.name
+        
+    class Meta:
+        verbose_name = "Застройщик"
+        verbose_name_plural = "Застройщики"
+        ordering = ['name']
 
 class Apartment(models.Model):
     MATERIAL_CHOICES = (
@@ -62,28 +72,33 @@ class Apartment(models.Model):
         ('none', 'Отсутствует'),
     )
     
-    name = models.CharField(max_length=255)
-    address = models.TextField()
-    images = models.JSONField(default=list)
-    object_code = models.CharField(max_length=100)
-    floor = models.PositiveIntegerField()
-    building_count = models.PositiveIntegerField()
-    material = models.CharField(max_length=50, choices=MATERIAL_CHOICES)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    available_programs = models.JSONField(default=list)
-    conditions = models.JSONField(default=list)
-    description = models.TextField()
-    has_balcony = models.BooleanField(default=False)
-    is_balcony_glazed = models.BooleanField(default=False)
-    building_start_date = models.DateField()
-    home_type = models.CharField(max_length=50, choices=HOME_TYPE_CHOICES)
-    bathroom_type = models.CharField(max_length=50, choices=BATHROOM_TYPE_CHOICES)
-    security = models.CharField(max_length=50, choices=SECURITY_CHOICES)
-    parking_type = models.CharField(max_length=50, choices=PARKING_TYPE_CHOICES)
-    elevator_type = models.CharField(max_length=50, choices=ELEVATOR_TYPE_CHOICES)
-    apartment_types = models.JSONField(default=list)
-    builder = models.ForeignKey(Builder, on_delete=models.CASCADE, related_name='apartments')
+    name = models.CharField(max_length=255, verbose_name="Название")
+    address = models.TextField(verbose_name="Адрес")
+    images = models.JSONField(default=list, verbose_name="Изображения")
+    object_code = models.CharField(max_length=100, verbose_name="Код объекта")
+    floor = models.PositiveIntegerField(verbose_name="Этаж")
+    building_count = models.PositiveIntegerField(verbose_name="Количество зданий")
+    material = models.CharField(max_length=50, choices=MATERIAL_CHOICES, verbose_name="Материал")
+    start_date = models.DateField(verbose_name="Дата начала продаж")
+    end_date = models.DateField(verbose_name="Дата завершения")
+    available_programs = models.JSONField(default=list, verbose_name="Доступные программы")
+    conditions = models.JSONField(default=list, verbose_name="Условия")
+    description = models.TextField(verbose_name="Описание")
+    has_balcony = models.BooleanField(default=False, verbose_name="Есть балкон")
+    is_balcony_glazed = models.BooleanField(default=False, verbose_name="Балкон остеклен")
+    building_start_date = models.DateField(verbose_name="Дата начала строительства")
+    home_type = models.CharField(max_length=50, choices=HOME_TYPE_CHOICES, verbose_name="Тип жилья")
+    bathroom_type = models.CharField(max_length=50, choices=BATHROOM_TYPE_CHOICES, verbose_name="Тип санузла")
+    security = models.CharField(max_length=50, choices=SECURITY_CHOICES, verbose_name="Охрана")
+    parking_type = models.CharField(max_length=50, choices=PARKING_TYPE_CHOICES, verbose_name="Тип паркинга")
+    elevator_type = models.CharField(max_length=50, choices=ELEVATOR_TYPE_CHOICES, verbose_name="Тип лифта")
+    apartment_types = models.JSONField(default=list, verbose_name="Типы квартир")
+    builder = models.ForeignKey(Builder, on_delete=models.CASCADE, related_name='apartments', verbose_name="Застройщик")
     
     def __str__(self):
         return self.name
+        
+    class Meta:
+        verbose_name = "Квартира"
+        verbose_name_plural = "Квартиры"
+        ordering = ['name']
