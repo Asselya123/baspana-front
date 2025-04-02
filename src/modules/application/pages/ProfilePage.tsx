@@ -1,8 +1,9 @@
 import { HeartOutlined, RightOutlined } from "@ant-design/icons";
-import { Button, Typography } from "antd";
+import { Button, ConfigProvider, Typography } from "antd";
 import PreviewCard from "@/assets/card-preview.png";
+import PeopleIcon from "@/assets/people.svg";
 
-const AppartmentCard = ({
+const ApartmentItemCard = ({
   title,
   price,
   label,
@@ -15,13 +16,13 @@ const AppartmentCard = ({
   isLiked: boolean;
 }) => {
   return (
-    <div className="overflow-hidden rounded-xl">
+    <div className="w-[280px] min-w-[280px] overflow-hidden rounded-xl">
       <div className="relative">
-        <img src={image} alt={title} className="object-cover w-full" />
+        <img src={image} alt={title} className="w-full object-cover" />
         <div className="absolute right-4 top-4">
           <Button icon={<HeartOutlined />} />
         </div>
-        <div className="absolute px-4 py-1 text-xs bg-white left-4 top-4 rounded-2xl">
+        <div className="absolute left-4 top-4 rounded-2xl bg-white px-4 py-1 text-xs">
           {label}
         </div>
       </div>
@@ -33,7 +34,27 @@ const AppartmentCard = ({
   );
 };
 
-const APPARTMENT_PREVIEW_LIST = [
+const APARTMENT_PREVIEW_LIST = [
+  {
+    label: "Прием заявлений",
+    price: (
+      <span>
+        от 390 300 ₸ м<sup>2</sup>
+      </span>
+    ),
+    image: PreviewCard,
+    title: "40 квартирный жилой дом по ул. Кабанбай батыра 186",
+  },
+  {
+    label: "Прием заявлений",
+    price: (
+      <span>
+        от 390 300 ₸ м<sup>2</sup>
+      </span>
+    ),
+    image: PreviewCard,
+    title: "40 квартирный жилой дом по ул. Кабанбай батыра 186",
+  },
   {
     label: "Прием заявлений",
     price: (
@@ -66,12 +87,33 @@ const APPARTMENT_PREVIEW_LIST = [
   },
 ];
 
+const NoApplicationFound = () => {
+  return (
+    <div className="flex flex-col items-center justify-center p-20">
+      <img src={PeopleIcon} alt="No application found" />
+      <Typography.Title level={4}>
+        У вас нет статуса очередника
+      </Typography.Title>
+      <p className="text-[#7A7E81 mb-5 text-center">
+        Для постановки в очередь на жилье подайте заявку и подпишите её с
+        помощью ЭЦП
+      </p>
+      <ConfigProvider theme={{ token: { colorPrimary: "#F05E22" } }}>
+        <Button size="large" type="primary">
+          Подать заявку
+        </Button>
+      </ConfigProvider>
+    </div>
+  );
+};
+
 export const ProfilePage = () => {
   return (
     <>
-      <div className="flex gap-8 p-5 bg-white rounded-xl">
+      <NoApplicationFound />
+      <div className="flex gap-8 rounded-xl bg-white p-5">
         <div
-          className="flex flex-col items-center justify-center px-8 py-5 rounded-xl"
+          className="flex flex-col items-center justify-center rounded-xl px-8 py-5"
           style={{
             background:
               "linear-gradient(141deg, #008F91 15.18%, #003D3E 86.41%)",
@@ -94,9 +136,9 @@ export const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-5 p-5 bg-white rounded-xl">
+      <div className="flex flex-col gap-5 rounded-xl bg-white p-5">
         <div
-          className="flex gap-5 px-8 py-5 rounded-xl"
+          className="flex gap-5 rounded-xl px-8 py-5"
           style={{
             background:
               "linear-gradient(262deg, #DBFBDA 5.93%, #D1EEFF 68.26%)",
@@ -120,9 +162,9 @@ export const ProfilePage = () => {
           </Button>
         </div>
         <div>
-          <div className="flex justify-between gap-5">
-            {APPARTMENT_PREVIEW_LIST.map((item, index) => (
-              <AppartmentCard key={index} {...item} isLiked={false} />
+          <div className="flex w-[calc(min(100vw,1280px)-272px-80px-64px-40px)] gap-5 overflow-x-scroll">
+            {APARTMENT_PREVIEW_LIST.map((item, index) => (
+              <ApartmentItemCard key={index} {...item} isLiked={false} />
             ))}
           </div>
         </div>
