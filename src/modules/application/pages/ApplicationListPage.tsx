@@ -67,6 +67,7 @@ export const ApplicationListPage: FC<ApplicationListPageProps> = ({}) => {
         <Input prefix={<SearchOutlined />} placeholder="Поиск" />
       </div>
       <Table
+        rowKey={(record) => record.id}
         dataSource={data}
         columns={columns}
         pagination={{ pageSize: 10 }}
