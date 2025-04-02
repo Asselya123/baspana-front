@@ -1,14 +1,17 @@
 import { HeartOutlined, RightOutlined } from "@ant-design/icons";
 import { Button, ConfigProvider, Typography } from "antd";
-import PreviewCard from "@/assets/card-preview.png";
+import { Link } from "react-router-dom";
 import PeopleIcon from "@/assets/people.svg";
+import { useGetApartments } from "./apartments";
 
 const ApartmentItemCard = ({
+  id,
   title,
   price,
   label,
   image,
 }: {
+  id: string;
   title: string;
   price: JSX.Element | string;
   label: string;
@@ -16,76 +19,30 @@ const ApartmentItemCard = ({
   isLiked: boolean;
 }) => {
   return (
-    <div className="w-[280px] min-w-[280px] overflow-hidden rounded-xl">
-      <div className="relative">
-        <img src={image} alt={title} className="w-full object-cover" />
-        <div className="absolute right-4 top-4">
-          <Button icon={<HeartOutlined />} />
+    <Link to={`/apartments/${id}`}>
+      <div className="w-[280px] min-w-[280px] overflow-hidden rounded-xl">
+        <div className="relative">
+          <img
+            src={image}
+            className="h-[160px] w-full bg-gradient-to-l from-[#008F91] to-[#003D3E] object-cover"
+          />
+          <div className="absolute right-4 top-4">
+            <Button icon={<HeartOutlined />} />
+          </div>
+          <div className="absolute left-4 top-4 rounded-2xl bg-white px-4 py-1 text-xs">
+            {label}
+          </div>
         </div>
-        <div className="absolute left-4 top-4 rounded-2xl bg-white px-4 py-1 text-xs">
-          {label}
+        <div className="flex flex-col gap-2 bg-[#EBEFF1] p-4">
+          <h5 className="h-[48px] overflow-hidden text-ellipsis text-base font-semibold leading-[24px] !text-black">
+            {title}
+          </h5>
+          <Typography.Paragraph>{price}</Typography.Paragraph>
         </div>
       </div>
-      <div className="flex flex-col gap-2 bg-[#EBEFF1] p-4">
-        <Typography.Title level={5}>{title}</Typography.Title>
-        <Typography.Paragraph>{price}</Typography.Paragraph>
-      </div>
-    </div>
+    </Link>
   );
 };
-
-const APARTMENT_PREVIEW_LIST = [
-  {
-    label: "Прием заявлений",
-    price: (
-      <span>
-        от 390 300 ₸ м<sup>2</sup>
-      </span>
-    ),
-    image: PreviewCard,
-    title: "40 квартирный жилой дом по ул. Кабанбай батыра 186",
-  },
-  {
-    label: "Прием заявлений",
-    price: (
-      <span>
-        от 390 300 ₸ м<sup>2</sup>
-      </span>
-    ),
-    image: PreviewCard,
-    title: "40 квартирный жилой дом по ул. Кабанбай батыра 186",
-  },
-  {
-    label: "Прием заявлений",
-    price: (
-      <span>
-        от 390 300 ₸ м<sup>2</sup>
-      </span>
-    ),
-    image: PreviewCard,
-    title: "40 квартирный жилой дом по ул. Кабанбай батыра 186",
-  },
-  {
-    label: "Прием заявлений",
-    price: (
-      <span>
-        от 390 300 ₸ м<sup>2</sup>
-      </span>
-    ),
-    image: PreviewCard,
-    title: "40 квартирный жилой дом по ул. Кабанбай батыра 186",
-  },
-  {
-    label: "Прием заявлений",
-    price: (
-      <span>
-        от 390 300 ₸ м<sup>2</sup>
-      </span>
-    ),
-    image: PreviewCard,
-    title: "40 квартирный жилой дом по ул. Кабанбай батыра 186",
-  },
-];
 
 const NoApplicationFound = () => {
   return (
@@ -108,6 +65,7 @@ const NoApplicationFound = () => {
 };
 
 export const ProfilePage = () => {
+  const { data: apartments } = useGetApartments();
   return (
     <>
       <NoApplicationFound />
@@ -163,8 +121,16 @@ export const ProfilePage = () => {
         </div>
         <div>
           <div className="flex w-[calc(min(100vw,1280px)-272px-80px-64px-40px)] gap-5 overflow-x-scroll">
-            {APARTMENT_PREVIEW_LIST.map((item, index) => (
-              <ApartmentItemCard key={index} {...item} isLiked={false} />
+            {apartments?.map((item, index) => (
+              <ApartmentItemCard
+                key={index}
+                id={item.id}
+                isLiked={false}
+                title={item.address}
+                price={`от ${item.apartment_types[0]?.cost_per_square_meter} ₸/м²`}
+                label={item.name}
+                image={item.images[0]}
+              />
             ))}
           </div>
         </div>

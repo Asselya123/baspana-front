@@ -7,7 +7,7 @@ const axiosApi = axios.create({
   baseURL: baseURL,
 });
 
-const axiosAuthorizedApi = axios.create({
+export const axiosAuthorizedApi = axios.create({
   baseURL: baseURL,
 });
 
