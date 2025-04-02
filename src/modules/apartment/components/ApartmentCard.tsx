@@ -25,7 +25,7 @@ const InfoItem: FC<{ label: string; value: string }> = ({ label, value }) => {
 export const ApartmentCard: FC<ApartmentCardProps> = ({ apartmentTypes }) => {
   const [selectedApartment, setSelectedApartment] = useState(apartmentTypes[0]);
   return (
-    <div className="h-max rounded-lg border border-[#D1D4D7] p-5">
+    <div className="h-max w-[360px] min-w-[340px] rounded-lg border border-[#D1D4D7] p-5">
       <Select
         options={apartmentTypes.map((type) => ({
           label: type.label,

@@ -17,6 +17,15 @@ axiosAuthorizedApi.interceptors.request.use((config) => {
   return config;
 });
 
+axiosAuthorizedApi.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status === 401) {
+      localStorage.removeItem("token");
+    }
+  },
+);
+
 export const login = async (
   credentials: LoginRequest,
 ): Promise<LoginResponse> => {

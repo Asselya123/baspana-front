@@ -26,7 +26,6 @@ export const ApplicationSignPage: FC<ApplicationSignPageProps> = ({}) => {
   const location = useLocation();
   const [step, setStep] = useState(getStep(location.search));
   const navigate = useNavigate();
-  console.log(step);
 
   return (
     <Layout className="bg-[#F6F7F8]">

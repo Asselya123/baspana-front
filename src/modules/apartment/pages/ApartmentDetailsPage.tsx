@@ -1,8 +1,11 @@
+import { Empty, Spin } from "antd";
+import { useParams } from "react-router-dom";
 import CompanyLogo from "@/assets/company-logo.svg";
 import Eye from "@/assets/eye.svg";
 import Preview from "@/assets/preview.webp";
 import { GoBack } from "@/components/GoBack";
 import { Layout } from "@/components/Layout";
+import { useGetApartmentById } from "@/modules/application/pages/apartments";
 import { ApartmentCard } from "../components/ApartmentCard";
 import { ApartmentCarousel } from "../components/ApartmentCarousel";
 import { ApartmentCommonInfo } from "../components/ApartmentCommonInfo";
@@ -14,42 +17,138 @@ import { AvailablePrograms } from "../components/AvailablePrograms";
 import { BuilderInfo } from "../components/BuilderInfo";
 import { BuildingDuration } from "../components/BuildingDuration";
 import { QuestionBlock } from "../components/QuestionBlock";
-import {
-  APARTMENT_INFO,
-  AVAILABLE_PROGRAMS,
-  COMMON_INFO,
-  CONDITIONS,
-} from "../components/mockData";
-
-const description =
-  "В составе квартир предусматриваются жилые комнаты, кухни, санузлы, балконы. Фундаменты – монолитные железобетонные, стены тех подполья - железобетонные монолитные. Наружные стены и перегородки – сборные трехслойные наружные стеновые несущие панели, перекрытия – сборные железобетонные панели, лестницы - монолитные железобетонные.";
 
 export const ApartmentDetailsPage = () => {
-  // Mock data for description
-
+  const { id } = useParams();
+  const { data: apartment, isLoading } = useGetApartmentById(id ?? "");
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="flex h-full w-full items-center justify-center py-20">
+          <Spin size="large" />
+        </div>
+      </Layout>
+    );
+  }
+  if (!apartment) {
+    return (
+      <Layout>
+        <div className="flex h-full w-full items-center justify-center py-20">
+          <Empty description="Квартира не найдена" />
+        </div>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <GoBack />
       <div className="mt-5 flex w-full grow justify-center">
         <div className="flex w-full flex-col">
           <ApartmentHeader
-            title='ЖК "Жас Канат"'
-            address="Казахстан, Жамбылская область, Тараз, 15-й микрорайон"
+            title={apartment?.name}
+            address={apartment?.address}
             viewCount={200}
             eyeIcon={Eye}
           />
           <div className="flex gap-10">
-            <div className="max-w-[800px]">
+            <div className="max-w-[800px] max-xl:w-[700px] max-lg:w-[600px]">
               <ApartmentCarousel images={[Preview, Preview, Preview]} />
-              <ApartmentInfo info={APARTMENT_INFO} />
-              <AvailablePrograms programs={AVAILABLE_PROGRAMS} />
-              <ApartmentConditions conditions={CONDITIONS} />
-              <ApartmentDescription description={description} />
-              <ApartmentCommonInfo commonInfo={COMMON_INFO} />
+              <ApartmentInfo
+                info={[
+                  {
+                    title: "Код объекта",
+                    value: apartment.object_code,
+                  },
+                  {
+                    title: "Этажность",
+                    value: `${apartment.floor} этаж`,
+                  },
+                  {
+                    title: "Зданий",
+                    value: `${apartment.building_count} зданий`,
+                  },
+                  {
+                    title: "Материал",
+                    value: apartment.material,
+                  },
+                  {
+                    title: "Начало строительства",
+                    value: apartment.building_start_date,
+                  },
+                  {
+                    title: "Срок сдачи",
+                    value: apartment.building_start_date,
+                  },
+                ]}
+              />
+              <AvailablePrograms
+                programs={apartment.available_programs.map((program) => ({
+                  label: program,
+                }))}
+              />
+              <ApartmentConditions
+                conditions={apartment.conditions.map((condition) => ({
+                  label: condition,
+                }))}
+              />
+              <ApartmentDescription description={apartment.description} />
+              <ApartmentCommonInfo
+                commonInfo={[
+                  {
+                    propertyName: "Балкон",
+                    value: apartment.has_balcony ? "Есть" : "Нет",
+                  },
+                  {
+                    propertyName: "Балкон",
+                    value: apartment.is_balcony_glazed ? "Есть" : "Нет",
+                  },
+                  {
+                    propertyName: "Год постройки",
+                    value: apartment.building_start_date,
+                  },
+                  {
+                    propertyName: "Тип дома",
+                    value: apartment.home_type,
+                  },
+                  {
+                    propertyName: "Тип санузла",
+                    value: apartment.bathroom_type,
+                  },
+                  {
+                    propertyName: "Безопасность",
+                    value: apartment.security,
+                  },
+                  {
+                    propertyName: "Парковка",
+                    value: apartment.parking_type,
+                  },
+                  {
+                    propertyName: "Лифт",
+                    value: apartment.elevator_type,
+                  },
+                ]}
+              />
               <BuilderInfo
                 companyLogo={CompanyLogo}
-                companyName="ТОО «Service СМУ»"
-                info={APARTMENT_INFO}
+                companyName={apartment.builder.name}
+                info={[
+                  {
+                    title: "Телефон",
+                    value: apartment.builder.phone_number,
+                  },
+                  {
+                    title: "Email",
+                    value: apartment.builder.email,
+                  },
+                  {
+                    title: "Сайт",
+                    value: apartment.builder.site,
+                  },
+                  {
+                    title: "Контакты",
+                    value: apartment.builder.contacts,
+                  },
+                ]}
               />
               <QuestionBlock
                 title="Остались вопросы?"
@@ -79,18 +178,16 @@ export const ApartmentDetailsPage = () => {
               />
             </div>
             <ApartmentCard
-              apartmentTypes={[
-                {
-                  label: "1-комнатные",
-                  roomCount: 1,
-                  minArea: 30,
-                  maxArea: 40,
-                  price: 1000000,
-                  pricePerSquareMeter: 100000,
-                  availableCount: 10,
-                  schemeUrl: Preview,
-                },
-              ]}
+              apartmentTypes={apartment.apartment_types.map((type) => ({
+                label: type.label,
+                roomCount: type.room_count,
+                minArea: type.min_area,
+                maxArea: type.max_area,
+                price: type.min_area * type.cost_per_square_meter,
+                pricePerSquareMeter: type.cost_per_square_meter,
+                availableCount: type.available_count,
+                schemeUrl: type.scheme_url,
+              }))}
             />
           </div>
         </div>

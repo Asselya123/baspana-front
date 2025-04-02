@@ -34,7 +34,9 @@ export const BuilderInfo: React.FC<BuilderInfoProps> = ({
             className="flex flex-col gap-1 text-sm"
           >
             <p className="text-gray-500">{item.title}</p>
-            <Text strong>{item.value}</Text>
+            <Text strong className="max-w-[200px] truncate">
+              {item.value}
+            </Text>
           </div>
         ))}
       </div>

@@ -6,6 +6,7 @@ import { ApplicationSignPage } from "./modules/application/pages/ApplicationSign
 import { OperationsPage } from "./modules/application/pages/OperationsPage";
 import { PersonalCabinetLayout } from "./modules/application/pages/PersonalCabinetLayout";
 import { ProfilePage } from "./modules/application/pages/ProfilePage";
+import { Protected } from "./modules/application/pages/Protected";
 import { LandingPage } from "./modules/shared/pages/LandingPage";
 import LoginPage from "./modules/shared/pages/LoginPage";
 
@@ -16,13 +17,15 @@ export const RouterProvider: FC<RouterProviderProps> = ({}) => {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<LandingPage />} />
-      <Route path="/sign" element={<ApplicationSignPage />} />
-      <Route element={<PersonalCabinetLayout />}>
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/operations" element={<OperationsPage />} />
-        <Route path="/applications" element={<ApplicationListPage />} />
+      <Route element={<Protected />}>
+        <Route path="/sign" element={<ApplicationSignPage />} />
+        <Route element={<PersonalCabinetLayout />}>
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/operations" element={<OperationsPage />} />
+          <Route path="/applications" element={<ApplicationListPage />} />
+        </Route>
+        <Route path="/apartments/:id" element={<ApartmentDetailsPage />} />
       </Route>
-      <Route path="/apartments/:id" element={<ApartmentDetailsPage />} />
     </Routes>
   );
 };
