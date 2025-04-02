@@ -23,12 +23,21 @@ export interface Apartment {
   description: string;
   has_balcony: boolean;
   is_balcony_glazed: boolean;
+  building_start_date: string;
   home_type: string;
   bathroom_type: string;
   security: string;
   parking_type: string;
   elevator_type: string;
-  cost_per_square_meter: number;
+  apartment_types: {
+    label: string;
+    room_count: number;
+    min_area: number;
+    max_area: number;
+    cost_per_square_meter: number;
+    available_count: number;
+    scheme_url: string;
+  }[];
   builder: {
     icon: string;
     name: string;
