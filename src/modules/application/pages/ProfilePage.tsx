@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PeopleIcon from "@/assets/people.svg";
 import { useGetApartments } from "./apartments";
 import { useGetApplications } from "./application";
+import { useGetProfile } from "./profile";
 
 const ApartmentItemCard = ({
   id,
@@ -71,13 +72,14 @@ export const ProfilePage = () => {
   const { data: apartments } = useGetApartments();
   const { data: applications, isLoading } = useGetApplications();
   const [debouncedLoading, setDebouncedLoading] = useState(true);
+  const { data: profile, isLoading: isProfileLoading } = useGetProfile();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDebouncedLoading(isLoading);
+      setDebouncedLoading(isLoading || isProfileLoading);
     }, 500);
     return () => clearTimeout(timer);
-  }, [isLoading]);
+  }, [isLoading, isProfileLoading]);
 
   if (debouncedLoading) {
     return <Skeleton active />;
@@ -98,18 +100,21 @@ export const ProfilePage = () => {
           }}
         >
           <p className="text-white opacity-70">Дата постановки</p>
-          <h5 className="text-2xl font-medium text-white">28.12.2015</h5>
+          <h5 className="text-2xl font-medium text-white">
+            {new Date(applications?.[0]?.creation_date).toLocaleDateString(
+              "ru-RU",
+            )}
+          </h5>
         </div>
-        <div>
-          <Typography.Title level={3}>Жумажан Жанна Бериковна</Typography.Title>
-          <p className="mb-3 text-[#7A7E81]">
-            Алматинская область, Талгарский район, поселок Туздыбастау, улица
-            Нурмагамбетова, дом 9{" "}
-          </p>
-          <div className="rounded-lg bg-[#F5F6F8] px-5 py-3">
+        <div className="grow">
+          <Typography.Title level={3}>
+            {profile?.user?.first_name} {profile?.user?.last_name}
+          </Typography.Title>
+          <p className="mb-3 text-[#7A7E81]">{profile?.address}</p>
+          <div className="w-full rounded-lg bg-[#F5F6F8] px-5 py-3">
             <p className="text-xs text-[#7A7E81]">Категория</p>
             <p className="text-sm text-[#333839]">
-              Многодетная семья, инвалидность
+              {profile?.social_categories}
             </p>
           </div>
         </div>

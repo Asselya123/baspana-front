@@ -55,3 +55,16 @@ export interface Application {
   creation_date: string;
   document_url: string;
 }
+
+export interface Profile {
+  user: {
+    id: string;
+    name: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+  };
+  address: string;
+  social_categories: string;
+  phone_number: string;
+}
