@@ -1,6 +1,9 @@
 from django.db import models
 import os
 import uuid
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def upload_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -101,4 +104,30 @@ class Apartment(models.Model):
     class Meta:
         verbose_name = "Квартира"
         verbose_name_plural = "Квартиры"
+        ordering = ['name']
+
+
+class Application(models.Model):
+    STATUS_CHOICES = (
+        ('success', 'Принято'),
+        ('fail', 'Отказано'),
+        ('in_progress', 'В процессе'),
+    )
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='applications',
+        verbose_name="Пользователь"
+    )
+    name = models.CharField(max_length=255, verbose_name="Название")
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, verbose_name="Статус")
+    creation_date = models.DateField(verbose_name="Дата создания")
+
+    def __str__(self):
+        return f"{self.name} — {self.user}"
+
+    class Meta:
+        verbose_name = "Заявка"
+        verbose_name_plural = "Заявки"
         ordering = ['name']

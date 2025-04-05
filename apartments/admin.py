@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.db.models import JSONField
 from django_json_widget.widgets import JSONEditorWidget
-from .models import Apartment, Builder, UploadedFile
+from .models import Apartment, Builder, UploadedFile, Application
 
 @admin.register(Builder)
 class BuilderAdmin(admin.ModelAdmin):
@@ -72,3 +72,9 @@ class UploadedFileAdmin(admin.ModelAdmin):
     def file_url(self, obj):
         return format_html('<a href="{}" target="_blank">{}</a>', obj.file.url, obj.file.url)
     file_url.short_description = "URL файла"
+
+@admin.register(Application)
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'user', 'status', 'creation_date')
+    list_filter = ('status',)
+    search_fields = ('name', 'user__username')

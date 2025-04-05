@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-from .models import Apartment, Builder, UploadedFile
-from .serializers import ApartmentSerializer, BuilderSerializer, LoginSerializer, FileUploadSerializer
+from .models import Apartment, Builder, UploadedFile, Application
+from .serializers import ApartmentSerializer, BuilderSerializer, LoginSerializer, FileUploadSerializer, ApplicationSerializer
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -85,3 +85,13 @@ def upload_file(request):
             'path': file_obj.file.name
         }, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ApplicationViewSet(viewsets.ModelViewSet):
+    serializer_class = ApplicationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Application.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

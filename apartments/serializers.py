@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Apartment, Builder, UploadedFile
+from .models import Apartment, Builder, UploadedFile, Application
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=150)
@@ -38,3 +38,10 @@ class FileUploadSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         file_url = obj.file.url
         return request.build_absolute_uri(file_url) if request else file_url
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Application
+        fields = ['id', 'user', 'name', 'status', 'creation_date']
