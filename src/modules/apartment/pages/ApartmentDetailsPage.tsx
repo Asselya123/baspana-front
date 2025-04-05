@@ -52,7 +52,7 @@ export const ApartmentDetailsPage = () => {
           />
           <div className="flex gap-10">
             <div className="max-w-[800px] max-xl:w-[700px] max-lg:w-[600px]">
-              <ApartmentCarousel images={[Preview, Preview, Preview]} />
+              <ApartmentCarousel images={apartment.images} />
               <ApartmentInfo
                 info={[
                   {

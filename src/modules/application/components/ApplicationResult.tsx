@@ -2,6 +2,7 @@ import { DownloadOutlined, FileOutlined } from "@ant-design/icons";
 import { Button, ConfigProvider, Result, Typography } from "antd";
 import { FC } from "react";
 import { Application } from "@/types";
+import { useGetProfile } from "../pages/profile";
 
 const { Title } = Typography;
 
@@ -14,6 +15,7 @@ export const ApplicationResult: FC<ApplicationResultProps> = ({
   onSubmit,
   application,
 }) => {
+  const { data: profile } = useGetProfile();
   return (
     <div className="mb-10 rounded-lg bg-white p-5">
       <Result
@@ -23,8 +25,10 @@ export const ApplicationResult: FC<ApplicationResultProps> = ({
         className="!pb-5"
       />
       <div className="mb-5 rounded-lg bg-[#F5F6F8] p-5">
-        <Title level={5}>Жумажан Жанна Бериковна</Title>
-        <p className="mb-5 text-sm text-gray-500">ИИН: 800619400123</p>
+        <Title level={5}>
+          {profile?.user?.first_name} {profile?.user?.last_name}
+        </Title>
+        <p className="mb-5 text-sm text-gray-500">ИИН: {profile?.iin}</p>
         <div className="mb-5 flex gap-20 rounded-lg bg-white p-5">
           <div>
             <p className="text-sm text-gray-500">Номер запроса</p>

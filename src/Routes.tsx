@@ -3,6 +3,7 @@ import { FC } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { ApartmentDetailsPage } from "./modules/apartment/pages/ApartmentDetailsPage";
+import { ApartmentsPage } from "./modules/apartment/pages/ApartmentsPage";
 import { ApplicationListPage } from "./modules/application/pages/ApplicationListPage";
 import { ApplicationSignPage } from "./modules/application/pages/ApplicationSignPage";
 import { OperationsPage } from "./modules/application/pages/OperationsPage";
@@ -42,6 +43,7 @@ export const RouterProvider: FC<RouterProviderProps> = ({}) => {
           <Route path="/applications" element={<ApplicationListPage />} />
         </Route>
         <Route path="/apartments/:id" element={<ApartmentDetailsPage />} />
+        <Route path="/apartments" element={<ApartmentsPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

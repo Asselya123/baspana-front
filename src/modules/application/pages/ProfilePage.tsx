@@ -7,7 +7,7 @@ import { useGetApartments } from "./apartments";
 import { useGetApplications } from "./application";
 import { useGetProfile } from "./profile";
 
-const ApartmentItemCard = ({
+export const ApartmentItemCard = ({
   id,
   title,
   price,
@@ -91,7 +91,7 @@ export const ProfilePage = () => {
 
   return (
     <>
-      <div className="flex gap-8 rounded-xl bg-white p-5">
+      <div className="mb-5 flex gap-8 rounded-xl bg-white p-5">
         <div
           className="flex flex-col items-center justify-center rounded-xl px-8 py-5"
           style={{
@@ -137,7 +137,7 @@ export const ProfilePage = () => {
             </Typography.Paragraph>
             <Button color="primary">Подробнее </Button>
           </div>
-          <Button href="/apartments/5">
+          <Button href="/apartments">
             <div className="flex items-center justify-center gap-1">
               Показать все объекты
               <RightOutlined />

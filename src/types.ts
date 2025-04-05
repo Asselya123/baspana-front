@@ -67,4 +67,5 @@ export interface Profile {
   address: string;
   social_categories: string;
   phone_number: string;
+  iin: string;
 }
