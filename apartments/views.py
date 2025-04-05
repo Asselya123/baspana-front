@@ -6,8 +6,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from .models import Apartment, Builder, UploadedFile, Application
 from .serializers import ApartmentSerializer, BuilderSerializer, LoginSerializer, FileUploadSerializer, \
-    ApplicationSerializer, UserProfileSerializer
-
+    ApplicationSerializer, UserProfileSerializer, ChangePasswordSerializer
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -104,3 +103,20 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def change_password_view(request):
+    user = request.user
+    serializer = ChangePasswordSerializer(data=request.data)
+
+    if serializer.is_valid():
+        if not user.check_password(serializer.validated_data['old_password']):
+            return Response({'old_password': ['Неверный текущий пароль.']}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.set_password(serializer.validated_data['new_password'])
+        user.save()
+
+        return Response({'detail': 'Пароль успешно изменён.'}, status=status.HTTP_200_OK)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from tutorial.quickstart.serializers import UserSerializer
 
 from .models import Apartment, Builder, UploadedFile, Application, UserProfile, User
 
@@ -59,3 +58,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ['id', 'user', 'address', 'phone_number', 'social_categories', 'iin']
+
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    def validate_new_password(self, value):
+        return value
