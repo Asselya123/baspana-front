@@ -47,3 +47,10 @@ export interface Apartment {
     email: string;
   };
 }
+
+export interface Application {
+  id: string;
+  name: string;
+  status: string;
+  creation_date: string;
+}

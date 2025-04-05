@@ -1,8 +1,10 @@
 import { HeartOutlined, RightOutlined } from "@ant-design/icons";
-import { Button, ConfigProvider, Typography } from "antd";
-import { Link } from "react-router-dom";
+import { Button, ConfigProvider, Skeleton, Typography } from "antd";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import PeopleIcon from "@/assets/people.svg";
 import { useGetApartments } from "./apartments";
+import { useGetApplications } from "./application";
 
 const ApartmentItemCard = ({
   id,
@@ -45,6 +47,7 @@ const ApartmentItemCard = ({
 };
 
 const NoApplicationFound = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center justify-center p-20">
       <img src={PeopleIcon} alt="No application found" />
@@ -56,7 +59,7 @@ const NoApplicationFound = () => {
         помощью ЭЦП
       </p>
       <ConfigProvider theme={{ token: { colorPrimary: "#F05E22" } }}>
-        <Button size="large" type="primary">
+        <Button size="large" type="primary" onClick={() => navigate("/sign")}>
           Подать заявку
         </Button>
       </ConfigProvider>
@@ -66,9 +69,26 @@ const NoApplicationFound = () => {
 
 export const ProfilePage = () => {
   const { data: apartments } = useGetApartments();
+  const { data: applications, isLoading } = useGetApplications();
+  const [debouncedLoading, setDebouncedLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedLoading(isLoading);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  if (debouncedLoading) {
+    return <Skeleton active />;
+  }
+
+  if (!applications?.length) {
+    return <NoApplicationFound />;
+  }
+
   return (
     <>
-      <NoApplicationFound />
       <div className="flex gap-8 rounded-xl bg-white p-5">
         <div
           className="flex flex-col items-center justify-center rounded-xl px-8 py-5"
