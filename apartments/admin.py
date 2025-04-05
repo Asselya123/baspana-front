@@ -78,3 +78,8 @@ class ApplicationAdmin(admin.ModelAdmin):
     list_display = ('name', 'user', 'status', 'creation_date')
     list_filter = ('status',)
     search_fields = ('name', 'user__username')
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ['user', 'creation_date', 'name']
+        return []

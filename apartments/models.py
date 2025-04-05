@@ -123,6 +123,7 @@ class Application(models.Model):
     name = models.CharField(max_length=255, verbose_name="Название")
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, verbose_name="Статус")
     creation_date = models.DateField(verbose_name="Дата создания")
+    document_url = models.URLField(blank=True, verbose_name="Ссылка на подтверждающий документ")
 
     def __str__(self):
         return f"{self.name} — {self.user}"
