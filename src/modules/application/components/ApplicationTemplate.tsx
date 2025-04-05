@@ -5,13 +5,19 @@ const { Title, Text } = Typography;
 
 interface ApplicationTemplateProps {
   onSubmit: () => void;
+  isAgree: boolean | null;
+  setIsAgree: (isAgree: boolean | null) => void;
+  loading: boolean;
 }
 
 export const ApplicationTemplate: FC<ApplicationTemplateProps> = ({
   onSubmit,
+  isAgree,
+  setIsAgree,
+  loading,
 }) => {
   return (
-    <div className="p-5 mb-10 bg-white rounded-lg">
+    <div className="mb-10 rounded-lg bg-white p-5">
       <Title level={5}>Заявление</Title>
       <p className="mb-5 text-base text-gray-500">
         Ознакомьтесь с Заявлением и подпишите его с ЭЦП
@@ -39,7 +45,7 @@ export const ApplicationTemplate: FC<ApplicationTemplateProps> = ({
           <div className="mb-6">
             <div className="flex items-end">
               <p>Настоящим я,</p>
-              <div className="flex-grow mx-2 border-b border-black"></div>
+              <div className="mx-2 flex-grow border-b border-black"></div>
             </div>
             <p className="block text-sm text-gray-500">
               (указывается полностью Фамилия, Имя, Отчество (при наличии), дата
@@ -52,7 +58,7 @@ export const ApplicationTemplate: FC<ApplicationTemplateProps> = ({
           <div className="mb-4">
             <div className="flex items-end">
               <p>Настоящим я,</p>
-              <div className="flex-grow mx-2 border-b border-black"></div>
+              <div className="mx-2 flex-grow border-b border-black"></div>
             </div>
             <p className="block text-sm text-gray-500">
               (указывается полностью Фамилия, Имя, Отчество (при наличии), дата
@@ -66,8 +72,8 @@ export const ApplicationTemplate: FC<ApplicationTemplateProps> = ({
             нуждающегося в жилье.
           </div>
 
-          <div className="p-3 mb-6 bg-white rounded">
-            <p className="block mb-4 font-medium">
+          <div className="mb-6 rounded bg-white p-3">
+            <p className="mb-4 block font-medium">
               Согласие либо отказ при распределении жилья, не соответствующего
               квадратуре (меньше положенного), комплектности и этажности <br />
               <span className="font-normal text-gray-500">
@@ -75,10 +81,22 @@ export const ApplicationTemplate: FC<ApplicationTemplateProps> = ({
               </span>
             </p>
 
-            <Radio.Group className="block my-4">
+            <Radio.Group className="my-4 block">
               <Space direction="vertical">
-                <Radio value="agree">согласен (-на)</Radio>
-                <Radio value="disagree">не согласен (-на)</Radio>
+                <Radio
+                  value="agree"
+                  onChange={() => setIsAgree(true)}
+                  checked={isAgree === true}
+                >
+                  согласен (-на)
+                </Radio>
+                <Radio
+                  value="disagree"
+                  checked={isAgree === false}
+                  onChange={() => setIsAgree(false)}
+                >
+                  не согласен (-на)
+                </Radio>
               </Space>
             </Radio.Group>
           </div>
@@ -86,7 +104,7 @@ export const ApplicationTemplate: FC<ApplicationTemplateProps> = ({
           <Divider />
 
           <div className="my-6">
-            <ul className="list-disc list-inside">
+            <ul className="list-inside list-disc">
               <li>
                 Не возражаю против проверки наличия или отсутствия у меня и
                 постоянно проживающих со мной членов семьи жилища в постоянном
@@ -122,12 +140,13 @@ export const ApplicationTemplate: FC<ApplicationTemplateProps> = ({
             .
           </div>
 
-          <div className="flex justify-end mt-8">
+          <div className="mt-8 flex justify-end">
             <Button
               type="primary"
               onClick={onSubmit}
               size="large"
               className="bg-blue-600"
+              loading={loading}
             >
               Подать заявление
             </Button>

@@ -6,11 +6,15 @@ const { Title, Text } = Typography;
 
 interface ConfirmationWaitProps {
   onSubmit: () => void;
+  loading: boolean;
 }
 
-export const ConfirmationWait: FC<ConfirmationWaitProps> = ({ onSubmit }) => {
+export const ConfirmationWait: FC<ConfirmationWaitProps> = ({
+  onSubmit,
+  loading,
+}) => {
   return (
-    <div className="p-5 mb-10 bg-white rounded-lg">
+    <div className="mb-10 rounded-lg bg-white p-5">
       <div className="mb-5 flex gap-4 rounded-lg bg-[#E7F5EE] p-5">
         <MessageOutlined className="block text-lg" />
         <div>
@@ -32,8 +36,8 @@ export const ConfirmationWait: FC<ConfirmationWaitProps> = ({ onSubmit }) => {
           Время ожидания до нескольких минут
         </p>
       </div>
-      <div className="flex justify-end mt-8">
-        <Button icon={<ReloadOutlined />} onClick={onSubmit}>
+      <div className="mt-8 flex justify-end">
+        <Button icon={<ReloadOutlined />} onClick={onSubmit} loading={loading}>
           Обновить
         </Button>
       </div>
