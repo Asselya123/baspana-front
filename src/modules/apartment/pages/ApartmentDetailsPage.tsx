@@ -1,4 +1,5 @@
 import { Empty, Spin } from "antd";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CompanyLogo from "@/assets/company-logo.svg";
 import Eye from "@/assets/eye.svg";
@@ -18,8 +19,28 @@ import { BuilderInfo } from "../components/BuilderInfo";
 import { BuildingDuration } from "../components/BuildingDuration";
 import { QuestionBlock } from "../components/QuestionBlock";
 
+const getApartmentViewCount = (id: string) => {
+  const saved = localStorage.getItem(`m-data-${id}`);
+
+  if (saved && Number.isInteger(parseInt(saved))) {
+    return parseInt(saved);
+  }
+  localStorage.setItem(`m-data-${id}`, "200");
+  return 200;
+};
+
+const updateApartmentViewCount = (id: string) => {
+  const saved = localStorage.getItem(`m-data-${id}`);
+  if (saved && Number.isInteger(parseInt(saved))) {
+    localStorage.setItem(`m-data-${id}`, (parseInt(saved) + 1).toString());
+  }
+};
+
 export const ApartmentDetailsPage = () => {
   const { id } = useParams();
+  useEffect(() => {
+    updateApartmentViewCount(id ?? "");
+  }, []);
   const { data: apartment, isLoading } = useGetApartmentById(id ?? "");
   if (isLoading) {
     return (
@@ -47,7 +68,7 @@ export const ApartmentDetailsPage = () => {
           <ApartmentHeader
             title={apartment?.name}
             address={apartment?.address}
-            viewCount={200}
+            viewCount={getApartmentViewCount(id ?? "")}
             eyeIcon={Eye}
           />
           <div className="flex gap-10">
