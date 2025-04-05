@@ -1,5 +1,8 @@
 from rest_framework import serializers
-from .models import Apartment, Builder, UploadedFile, Application
+from tutorial.quickstart.serializers import UserSerializer
+
+from .models import Apartment, Builder, UploadedFile, Application, UserProfile, User
+
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=150)
@@ -45,3 +48,14 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = ['id', 'user', 'name', 'status', 'creation_date', 'document_url']
+
+class NestedUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    user = NestedUserSerializer(read_only=True)
+    class Meta:
+        model = UserProfile
+        fields = ['id', 'user', 'address', 'phone_number', 'social_categories']

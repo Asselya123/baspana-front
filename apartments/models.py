@@ -132,3 +132,12 @@ class Application(models.Model):
         verbose_name = "Заявка"
         verbose_name_plural = "Заявки"
         ordering = ['name']
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    address = models.CharField(max_length=255, blank=True, null=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    social_categories = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return f"Профиль: {self.user.username}"

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.db.models import JSONField
 from django_json_widget.widgets import JSONEditorWidget
-from .models import Apartment, Builder, UploadedFile, Application
+from .models import Apartment, Builder, UploadedFile, Application, UserProfile
 
 @admin.register(Builder)
 class BuilderAdmin(admin.ModelAdmin):
@@ -83,3 +83,7 @@ class ApplicationAdmin(admin.ModelAdmin):
         if obj:
             return ['user', 'creation_date', 'name']
         return []
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'phone_number', 'address', 'social_categories')

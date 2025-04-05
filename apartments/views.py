@@ -5,7 +5,9 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from .models import Apartment, Builder, UploadedFile, Application
-from .serializers import ApartmentSerializer, BuilderSerializer, LoginSerializer, FileUploadSerializer, ApplicationSerializer
+from .serializers import ApartmentSerializer, BuilderSerializer, LoginSerializer, FileUploadSerializer, \
+    ApplicationSerializer, UserProfileSerializer
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -28,6 +30,13 @@ def login_view(request):
             })
         return Response({'error': 'Неверные учетные данные'}, status=status.HTTP_401_UNAUTHORIZED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])  # AllowAny нельзя, иначе request.user — AnonymousUser
+def profile_view(request):
+    profile = request.user.profile  # обращаемся к UserProfile через related_name
+    serializer = UserProfileSerializer(instance=profile)
+    return Response(serializer.data)
 
 class BuilderViewSet(viewsets.ModelViewSet):
     """
