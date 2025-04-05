@@ -6,6 +6,7 @@ import { ApartmentDetailsPage } from "./modules/apartment/pages/ApartmentDetails
 import { ApartmentsPage } from "./modules/apartment/pages/ApartmentsPage";
 import { ApplicationListPage } from "./modules/application/pages/ApplicationListPage";
 import { ApplicationSignPage } from "./modules/application/pages/ApplicationSignPage";
+import ChangePasswordPage from "./modules/application/pages/ChangePasswordPage";
 import { OperationsPage } from "./modules/application/pages/OperationsPage";
 import { PersonalCabinetLayout } from "./modules/application/pages/PersonalCabinetLayout";
 import { ProfilePage } from "./modules/application/pages/ProfilePage";
@@ -41,6 +42,7 @@ export const RouterProvider: FC<RouterProviderProps> = ({}) => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/operations" element={<OperationsPage />} />
           <Route path="/applications" element={<ApplicationListPage />} />
+          <Route path="/change-password" element={<ChangePasswordPage />} />
         </Route>
         <Route path="/apartments/:id" element={<ApartmentDetailsPage />} />
         <Route path="/apartments" element={<ApartmentsPage />} />

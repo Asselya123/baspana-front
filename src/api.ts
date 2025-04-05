@@ -1,3 +1,5 @@
+import { useMutation } from "@tanstack/react-query";
+import { App } from "antd";
 import axios from "axios";
 import { LoginRequest, LoginResponse } from "./types";
 
@@ -31,4 +33,33 @@ export const login = async (
 ): Promise<LoginResponse> => {
   const response = await axiosApi.post("/api/login/", credentials);
   return response.data;
+};
+
+type ChangePasswordRequest = {
+  old_password: string;
+  new_password: string;
+};
+
+const changePassword = async (
+  credentials: ChangePasswordRequest,
+): Promise<unknown> => {
+  const response = await axiosAuthorizedApi.post(
+    "/api/change-password/",
+    credentials,
+  );
+  return response.data;
+};
+
+export const useChangePassword = (onSuccess?: () => void) => {
+  const { message } = App.useApp();
+  return useMutation({
+    mutationFn: changePassword,
+    onSuccess: () => {
+      message.success("Пароль успешно изменен");
+      onSuccess?.();
+    },
+    onError: () => {
+      message.error("Не удалось изменить пароль");
+    },
+  });
 };

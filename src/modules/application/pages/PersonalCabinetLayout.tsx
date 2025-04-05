@@ -1,4 +1,5 @@
 import {
+  LockOutlined,
   LogoutOutlined,
   PaperClipOutlined,
   ProfileOutlined,
@@ -35,6 +36,12 @@ export const PersonalCabinetLayout: FC<PersonalCabinetLayoutProps> = ({}) => {
       icon: <SettingOutlined />,
       label: "Операции",
       onClick: () => navigate("/operations"),
+    },
+    {
+      key: "change-password",
+      icon: <LockOutlined />,
+      label: "Сменить пароль",
+      onClick: () => navigate("/change-password"),
     },
     {
       key: "logout",
