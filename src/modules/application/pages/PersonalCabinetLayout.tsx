@@ -6,7 +6,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Menu } from "antd";
+import { App, Menu } from "antd";
 import { FC, useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Footer } from "@/components/Footer";
@@ -18,6 +18,7 @@ interface PersonalCabinetLayoutProps {}
 
 export const PersonalCabinetLayout: FC<PersonalCabinetLayoutProps> = ({}) => {
   const navigate = useNavigate();
+  const { modal } = App.useApp();
   const items: MenuItem[] = [
     {
       key: "profile",
@@ -48,8 +49,14 @@ export const PersonalCabinetLayout: FC<PersonalCabinetLayoutProps> = ({}) => {
       icon: <LogoutOutlined />,
       label: "Выйти",
       onClick: () => {
-        localStorage.removeItem("token");
-        navigate("/login");
+        modal.confirm({
+          title: "Вы уверены?",
+          content: "Вы уверены, что хотите выйти?",
+          onOk: () => {
+            localStorage.removeItem("token");
+            navigate("/login");
+          },
+        });
       },
     },
   ];
