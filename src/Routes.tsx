@@ -1,5 +1,7 @@
+import { Button, Typography } from "antd";
 import { FC } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { Layout } from "./components/Layout";
 import { ApartmentDetailsPage } from "./modules/apartment/pages/ApartmentDetailsPage";
 import { ApplicationListPage } from "./modules/application/pages/ApplicationListPage";
 import { ApplicationSignPage } from "./modules/application/pages/ApplicationSignPage";
@@ -9,6 +11,21 @@ import { ProfilePage } from "./modules/application/pages/ProfilePage";
 import { Protected } from "./modules/application/pages/Protected";
 import { LandingPage } from "./modules/shared/pages/LandingPage";
 import LoginPage from "./modules/shared/pages/LoginPage";
+
+const NotFoundPage = () => {
+  const navigate = useNavigate();
+  return (
+    <Layout>
+      <div className="flex h-screen flex-col items-center justify-center">
+        <Typography.Title level={1}>404</Typography.Title>
+        <Typography.Title level={5}>Страница не найдена</Typography.Title>
+        <Button type="primary" onClick={() => navigate("/")}>
+          На главную
+        </Button>
+      </div>
+    </Layout>
+  );
+};
 
 interface RouterProviderProps {}
 
@@ -26,6 +43,7 @@ export const RouterProvider: FC<RouterProviderProps> = ({}) => {
         </Route>
         <Route path="/apartments/:id" element={<ApartmentDetailsPage />} />
       </Route>
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

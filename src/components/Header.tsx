@@ -1,6 +1,6 @@
 import { BellFilled, HomeOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import LogoIcon from "../assets/logo.svg";
 
@@ -58,21 +58,19 @@ const UserIcon = () => (
   </svg>
 );
 
-function getIsAuth(path: string) {
-  let isAuth = false;
-  ["/sign", "/profile", "/operations", "/applications", "/apartments"].forEach(
-    (p) => {
-      if (path.includes(p)) {
-        isAuth = true;
-      }
-    },
-  );
+function getIsAuth() {
+  const token = localStorage.getItem("token");
+  const isAuth = !!token;
   return isAuth;
 }
 
 export const Header = () => {
-  const location = useLocation();
-  const [isAuth] = useState(getIsAuth(location.pathname));
+  const [isAuth, setIsAuth] = useState(getIsAuth());
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setIsAuth(getIsAuth());
+  }, [pathname]);
 
   return (
     <header className="flex flex-col items-center">

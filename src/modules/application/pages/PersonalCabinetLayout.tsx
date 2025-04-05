@@ -1,4 +1,5 @@
 import {
+  LogoutOutlined,
   PaperClipOutlined,
   ProfileOutlined,
   SettingOutlined,
@@ -35,6 +36,15 @@ export const PersonalCabinetLayout: FC<PersonalCabinetLayoutProps> = ({}) => {
       label: "Операции",
       onClick: () => navigate("/operations"),
     },
+    {
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: "Выйти",
+      onClick: () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+      },
+    },
   ];
   const { pathname } = useLocation();
 
@@ -50,7 +60,7 @@ export const PersonalCabinetLayout: FC<PersonalCabinetLayoutProps> = ({}) => {
   }, [pathname]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex h-screen flex-col">
       <Header />
       <div className="mx-auto flex w-full max-w-[1280px] grow justify-center px-10">
         <div className="flex w-full">

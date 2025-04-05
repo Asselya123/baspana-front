@@ -1,6 +1,6 @@
 import { MessageOutlined, ReloadOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 const { Title, Text } = Typography;
 
@@ -13,6 +13,7 @@ export const ConfirmationWait: FC<ConfirmationWaitProps> = ({
   onSubmit,
   loading,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <div className="mb-10 rounded-lg bg-white p-5">
       <div className="mb-5 flex gap-4 rounded-lg bg-[#E7F5EE] p-5">
@@ -37,7 +38,17 @@ export const ConfirmationWait: FC<ConfirmationWaitProps> = ({
         </p>
       </div>
       <div className="mt-8 flex justify-end">
-        <Button icon={<ReloadOutlined />} onClick={onSubmit} loading={loading}>
+        <Button
+          icon={<ReloadOutlined />}
+          onClick={() => {
+            setIsLoading(true);
+            setTimeout(() => {
+              onSubmit();
+              setIsLoading(false);
+            }, 1000);
+          }}
+          loading={loading || isLoading}
+        >
           Обновить
         </Button>
       </div>

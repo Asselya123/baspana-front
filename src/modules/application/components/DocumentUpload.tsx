@@ -68,12 +68,12 @@ export const DocumentUpload: FC<DocumentUploadProps> = ({
       </div>
       <Dragger maxCount={1} customRequest={customUploadRequest}>
         <div className="flex w-full items-center justify-center gap-5">
-          перетащите файл сюда, чтобы загрузить или{" "}
+          перетащите файл сюда, чтобы загрузить или
+          <Button type="primary" htmlType="submit">
+            Загрузить
+          </Button>
         </div>
       </Dragger>
-      {/* <Upload accept=".pdf" maxCount={1} customRequest={customUploadRequest}>
-        <Button>Загрузить</Button>
-      </Upload> */}
       <div className="mt-8 flex justify-end">
         <Button type="primary" onClick={onSubmit}>
           Далее
