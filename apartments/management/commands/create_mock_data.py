@@ -45,7 +45,8 @@ class Command(BaseCommand):
                 'phone_number': '+7 (717) 269-00-00',
                 'site': 'https://bi.group',
                 'email': 'info@bi.group',
-                'icon': 'https://bi.group/images/logo.png',
+                # Optionally, you could update builder icons too:
+                'icon': 'https://via.placeholder.com/150?text=BI+Group',
             },
             {
                 'name': 'BAZIS-A',
@@ -53,7 +54,7 @@ class Command(BaseCommand):
                 'phone_number': '+7 (727) 393-20-20',
                 'site': 'https://bazis.kz',
                 'email': 'info@bazis.kz',
-                'icon': 'https://bazis.kz/images/logo.png',
+                'icon': 'https://via.placeholder.com/150?text=BAZIS-A',
             },
             {
                 'name': 'G-Park',
@@ -61,7 +62,7 @@ class Command(BaseCommand):
                 'phone_number': '+7 (707) 707-67-77',
                 'site': 'https://g-park.kz',
                 'email': 'info@g-park.kz',
-                'icon': 'https://g-park.kz/images/logo.png',
+                'icon': 'https://via.placeholder.com/150?text=G-Park',
             },
         ]
         builders = []
@@ -83,9 +84,10 @@ class Command(BaseCommand):
                 'name': 'ЖК Botanical Garden',
                 'address': 'Алматы, улица Тимирязева, 15',
                 'images': [
-                    'https://example.com/images/botanical1.jpg',
-                    'https://example.com/images/botanical2.jpg',
-                    'https://example.com/images/botanical3.jpg',
+                    # Using Unsplash image URLs (these images are publicly accessible)
+                    "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXBhcnRtZW50fGVufDB8fDB8fA%3D%3D",
+                    "https://www.shutterstock.com/image-photo/new-modern-block-flats-green-260nw-2476543287.jpg",
+                    "https://www.shutterstock.com/shutterstock/photos/2501530247/display_1500/stock-photo-new-modern-block-of-flats-in-green-area-residential-apartment-with-flat-buildings-exterior-luxury-2501530247.jpg"
                 ],
                 'object_code': 'BOT-001',
                 'floor': 24,
@@ -120,7 +122,7 @@ class Command(BaseCommand):
                         'max_area': 55,
                         'cost_per_square_meter': 500000,
                         'available_count': 10,
-                        'scheme_url': 'https://example.com/images/botanical_1room.jpg'
+                        'scheme_url': "https://www.researchgate.net/publication/320862366/figure/fig1/AS:557332455227392@1509889820936/Scheme-of-floor-plan-of-the-apartment.png"
                     },
                     {
                         'label': '2-комнатная',
@@ -129,7 +131,7 @@ class Command(BaseCommand):
                         'max_area': 75,
                         'cost_per_square_meter': 480000,
                         'available_count': 7,
-                        'scheme_url': 'https://example.com/images/botanical_2room.jpg'
+                        'scheme_url': "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAuUgrqpFXkzMJ0LsBv9UUm0NM9l9SG6mRbQ&s"
                     },
                     {
                         'label': '3-комнатная',
@@ -138,7 +140,7 @@ class Command(BaseCommand):
                         'max_area': 120,
                         'cost_per_square_meter': 450000,
                         'available_count': 5,
-                        'scheme_url': 'https://example.com/images/botanical_3room.jpg'
+                        'scheme_url': "https://thumbs.dreamstime.com/z/architecture-plan-apartment-layout-studio-condominium-flat-house-apartmnent-one-bedroom-small-space-interior-design-elements-189593674.jpg"
                     }
                 ],
                 'builder': builders[0]
@@ -147,8 +149,8 @@ class Command(BaseCommand):
                 'name': 'ЖК Green Valley',
                 'address': 'Алматы, улица Навои, 310',
                 'images': [
-                    'https://example.com/images/green_valley1.jpg',
-                    'https://example.com/images/green_valley2.jpg',
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmFXnLhxdROaeNpRBZ7semgXGWh-ATyot-mA&s",
+                    "https://thumbs.dreamstime.com/b/apartment-building-modern-buildings-new-westminster-british-columbia-canada-40351928.jpg"
                 ],
                 'object_code': 'GRV-002',
                 'floor': 16,
@@ -181,7 +183,7 @@ class Command(BaseCommand):
                         'max_area': 50,
                         'cost_per_square_meter': 420000,
                         'available_count': 15,
-                        'scheme_url': 'https://example.com/images/green_valley_1room.jpg'
+                        'scheme_url': "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzHA-z7rBD7CBGhnb0wO_zPbZWOvld49ZA5w&s"
                     },
                     {
                         'label': '2-комнатная',
@@ -190,7 +192,7 @@ class Command(BaseCommand):
                         'max_area': 70,
                         'cost_per_square_meter': 400000,
                         'available_count': 10,
-                        'scheme_url': 'https://example.com/images/green_valley_2room.jpg'
+                        'scheme_url': "https://thumbs.dreamstime.com/z/architecture-plan-apartment-layout-studio-condominium-flat-house-apartmnent-one-bedroom-small-space-interior-design-elements-189593674.jpg"
                     }
                 ],
                 'builder': builders[1]
@@ -199,9 +201,10 @@ class Command(BaseCommand):
                 'name': 'ЖК Nova City',
                 'address': 'Нур-Султан, проспект Туран, 55',
                 'images': [
-                    'https://example.com/images/nova_city1.jpg',
-                    'https://example.com/images/nova_city2.jpg',
-                    'https://example.com/images/nova_city3.jpg',
+                    "https://www.bankrate.com/2019/08/13233037/Condo-vs-apartment.jpeg?auto=webp&optimize=high&crop=16:9",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2heEAr62IA8aYpqsaA_EiI-cMDzmaKRZGIA&s",
+                    "https://marvel-b1-cdn.bc0a.com/f00000000155398/www.fsresidential.com/FSR/media/content-files/corporate/images/5-key-differences-article-420x290.jpg",
+                    "https://www.tollbrothersapartmentliving.com/wp-content/uploads/2023/03/005_Toll_4_11_19_UnionPl-983x720-1.jpg"
                 ],
                 'object_code': 'NOV-003',
                 'floor': 20,
@@ -237,7 +240,7 @@ class Command(BaseCommand):
                         'max_area': 45,
                         'cost_per_square_meter': 450000,
                         'available_count': 20,
-                        'scheme_url': 'https://example.com/images/nova_city_studio.jpg'
+                        'scheme_url': "https://fpg.roomsketcher.com/image/topic/28/image/2-Bedroom-Apartment-Plan-3D.jpg?w=350"
                     },
                     {
                         'label': '2-комнатная',
@@ -246,7 +249,7 @@ class Command(BaseCommand):
                         'max_area': 65,
                         'cost_per_square_meter': 430000,
                         'available_count': 15,
-                        'scheme_url': 'https://example.com/images/nova_city_2room.jpg'
+                        'scheme_url': "https://fpg.roomsketcher.com/image/topic/28/image/2-Bedroom-Apartment-Plan-3D.jpg?w=350"
                     },
                     {
                         'label': '3-комнатная',
@@ -255,7 +258,7 @@ class Command(BaseCommand):
                         'max_area': 100,
                         'cost_per_square_meter': 410000,
                         'available_count': 8,
-                        'scheme_url': 'https://example.com/images/nova_city_3room.jpg'
+                        'scheme_url': "https://thumbs.dreamstime.com/z/architecture-plan-apartment-layout-studio-condominium-flat-house-apartmnent-one-bedroom-small-space-interior-design-elements-189593674.jpg"
                     },
                     {
                         'label': '4-комнатная',
@@ -264,7 +267,7 @@ class Command(BaseCommand):
                         'max_area': 150,
                         'cost_per_square_meter': 400000,
                         'available_count': 5,
-                        'scheme_url': 'https://example.com/images/nova_city_4room.jpg'
+                        'scheme_url': "https://thumbs.dreamstime.com/z/architecture-plan-apartment-layout-studio-condominium-flat-house-apartmnent-one-bedroom-small-space-interior-design-elements-189593674.jpg"
                     }
                 ],
                 'builder': builders[0]
