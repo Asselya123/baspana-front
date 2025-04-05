@@ -58,4 +58,4 @@ class UserProfileSerializer(serializers.ModelSerializer):
     user = NestedUserSerializer(read_only=True)
     class Meta:
         model = UserProfile
-        fields = ['id', 'user', 'address', 'phone_number', 'social_categories']
+        fields = ['id', 'user', 'address', 'phone_number', 'social_categories', 'iin']

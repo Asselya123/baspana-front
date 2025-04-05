@@ -1,11 +1,7 @@
 from django.core.management.base import BaseCommand
-from django.utils import timezone
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
-import random
 import datetime
 import os
-import json
 from apartments.models import Builder, Apartment, UploadedFile
 
 class Command(BaseCommand):

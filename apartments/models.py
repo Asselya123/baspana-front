@@ -138,6 +138,7 @@ class UserProfile(models.Model):
     address = models.CharField(max_length=255, blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     social_categories = models.CharField(max_length=255, blank=True, null=True)
+    iin = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"Профиль: {self.user.username}"
