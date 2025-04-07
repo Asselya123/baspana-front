@@ -19,7 +19,7 @@ export const ApartmentsPage = () => {
     return (
       <Layout>
         <Empty className="mt-10">
-          <Typography.Title level={4}>Жилых объектов нет</Typography.Title>
+          <Typography.Title level={4}>Жилых комплексов нет</Typography.Title>
           <Typography.Paragraph>
             Попробуйте позже или обратитесь в техподдержку
           </Typography.Paragraph>
@@ -31,7 +31,7 @@ export const ApartmentsPage = () => {
   return (
     <Layout>
       <div className="mb-0 mt-5 flex">
-        <Typography.Title level={2}>Жилые объекты</Typography.Title>
+        <Typography.Title level={2}>Жилые комплексы</Typography.Title>
       </div>
 
       <div className="flex flex-wrap gap-5">

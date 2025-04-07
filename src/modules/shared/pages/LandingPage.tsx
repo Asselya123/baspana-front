@@ -73,16 +73,19 @@ const programs = [
     title: "Бақытты Отбасы",
     percent: "10%",
     image: <img src={ProgramImage1} />,
+    href: "https://hcsbk.kz/affordable-housing/bakytty-otbasy/",
   },
   {
     title: "Әскери Баспана",
     percent: "10%",
     image: <img src={ProgramImage2} />,
+    href: "https://hcsbk.kz/news/publications/-skeri-baspana-ba-darlamasyny-atysushylaryna-baspana-tauyp-ony-satyp-alu-a-bir-zhyl-ua-yt-beriledi/",
   },
   {
     title: "Женская Ипотека «ҰМАЙ»",
     percent: "10%",
     image: <img src={ProgramImage3} />,
+    href: "https://hcsbk.kz/to-get-a-loan/umai/",
   },
 ];
 
@@ -90,14 +93,17 @@ const ProgramCard = ({
   title,
   percent,
   image,
+  href,
 }: {
   title: ReactNode;
   percent: string;
   image: ReactNode;
+  href: string;
 }) => {
   return (
     <div
-      className={`relative flex h-[180px] w-[300px] flex-col justify-between rounded-3xl bg-white p-5`}
+      className={`relative flex h-[180px] w-[300px] cursor-pointer flex-col justify-between rounded-3xl bg-white p-5`}
+      onClick={() => window.open(href, "_blank")}
     >
       <div className="relative z-10 max-w-[150px] text-xl font-semibold">
         {title}
@@ -116,7 +122,7 @@ export const LandingPage: FC<LandingPageProps> = ({}) => {
     <Layout>
       <div className="grow bg-[#F6F7F8]">
         <div className="mx-auto max-w-[1280px] px-10 py-10">
-          <div className="flex items-center justify-center w-full gap-4">
+          <div className="flex w-full items-center justify-center gap-4">
             {links.map((link) => (
               <LinkCard key={link.href} {...link} />
             ))}
@@ -126,13 +132,18 @@ export const LandingPage: FC<LandingPageProps> = ({}) => {
             <Typography.Title level={3} className="text-center">
               Наши программы
             </Typography.Title>
-            <div className="flex items-center justify-center w-full gap-4 mt-10">
+            <div className="mt-10 flex w-full items-center justify-center gap-4">
               {programs.map((program) => (
                 <ProgramCard key={program.title} {...program} />
               ))}
             </div>
           </div>
-          <img src={BannerImage} alt="" className="w-full" />
+          <a
+            href="https://hcsbk.kz/news/press_relize/-rmetti-klientter09092024/"
+            target="_blank"
+          >
+            <img src={BannerImage} alt="" className="w-full" />
+          </a>
         </div>
       </div>
     </Layout>

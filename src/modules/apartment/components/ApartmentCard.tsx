@@ -22,6 +22,14 @@ const InfoItem: FC<{ label: string; value: string }> = ({ label, value }) => {
   );
 };
 
+const formatPrice = (price: number) => {
+  return price.toLocaleString("ru-RU", {
+    style: "currency",
+    currency: "KZT",
+    minimumFractionDigits: 0,
+  });
+};
+
 export const ApartmentCard: FC<ApartmentCardProps> = ({ apartmentTypes }) => {
   const [selectedApartment, setSelectedApartment] = useState(apartmentTypes[0]);
   return (
@@ -49,10 +57,10 @@ export const ApartmentCard: FC<ApartmentCardProps> = ({ apartmentTypes }) => {
           label="Площадь"
           value={`${selectedApartment.minArea} - ${selectedApartment.maxArea} м2`}
         />
-        <InfoItem label="Цена" value={selectedApartment.price.toString()} />
+        <InfoItem label="Цена" value={formatPrice(selectedApartment.price)} />
         <InfoItem
           label="Цена за м2"
-          value={selectedApartment.pricePerSquareMeter.toString()}
+          value={formatPrice(selectedApartment.pricePerSquareMeter)}
         />
         <InfoItem
           label="Доступно"

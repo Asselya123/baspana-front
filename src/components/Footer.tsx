@@ -17,7 +17,11 @@ const LinkGroup: FC<{
       <p className="mb-3 text-lg font-semibold">{title}</p>
       <div className="flex flex-col gap-2">
         {links.map((link, index) => (
-          <Link className="!text-black" key={index} to={link.href}>
+          <Link
+            className="!text-black hover:!underline"
+            key={index}
+            to={link.href}
+          >
             {link.label}
           </Link>
         ))}
@@ -29,19 +33,19 @@ const LinkGroup: FC<{
 const aboutLinks = [
   {
     label: "Госпрограммы",
-    href: "#",
+    href: "https://baspana.otbasybank.kz/programm-bank",
   },
   {
     label: "Вторичное жилье",
-    href: "#",
+    href: "https://baspana.otbasybank.kz/pool/search?neworsecond=second",
   },
   {
     label: "Новостройки",
-    href: "#",
+    href: "https://baspana.otbasybank.kz/pool/search?neworsecond=new",
   },
   {
     label: "Baspana.kz",
-    href: "#",
+    href: "https://baspana.otbasybank.kz",
   },
 ];
 
@@ -51,72 +55,97 @@ const MobileAppLinks = () => (
       Мобильное приложение <br />
       Otbasy Bank
     </p>
-    <div className="flex items-center gap-4 mt-3">
-      <img src={GoogleIcon} alt="google" />
-      <img src={AppleIcon} alt="apple" />
-      <img src={HuaweiIcon} alt="huawei" />
+    <div className="mt-3 flex items-center gap-4">
+      <a
+        href="https://play.google.com/store/apps/details?id=kz.sdk.hcsbk.otbasy_mobile&hl=ru&gl=US&pli=1"
+        target="_blank"
+      >
+        <img src={GoogleIcon} alt="google" />
+      </a>
+      <a
+        href="hhttps://apps.apple.com/kz/app/otbasy-bank-lite/id6451187079"
+        target="_blank"
+      >
+        <img src={AppleIcon} alt="apple" />
+      </a>
+      <a href="https://consumer.huawei.com/kz/" target="_blank">
+        <img src={HuaweiIcon} alt="huawei" />
+      </a>
     </div>
   </div>
 );
 
 const Contacts = () => (
   <div className="flex flex-col gap-1">
-    <p className="flex items-center gap-1 text-xl font-semibold">
+    <a
+      href="tel:300"
+      className="flex items-center gap-1 text-xl font-semibold !text-black"
+    >
       300
       <span className="text-sm font-normal text-[#7A7E81]">
         (бесплатно с мобильного)
       </span>
-    </p>
-    <p className="flex items-center gap-1 text-xl font-semibold">
+    </a>
+    <a
+      href="tel:+78000801880"
+      className="flex items-center gap-1 text-xl font-semibold !text-black"
+    >
       8 800 080-18-80
       <span className="text-sm font-normal text-[#7A7E81]">
         (бесплатно для звонков по РК)
       </span>
-    </p>
+    </a>
     <p className="flex items-center gap-3 py-3 text-xl font-semibold">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12Z"
-          fill="#333839"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M5 11.5065C5 7.91278 8.11522 5 11.958 5C15.8008 5 18.916 7.91278 18.916 11.5065C18.916 15.1003 15.8008 18.0131 11.958 18.0131C11.2635 18.0131 10.5926 17.9179 9.9597 17.7405L7.58508 19.0578V16.5675C6.00817 15.3749 5 13.5509 5 11.5065ZM15.7569 12.9568C15.7548 12.9336 15.7529 12.9136 15.7521 12.897C15.7441 12.7389 15.6021 12.7147 15.6021 12.7147C15.6021 12.7147 14.4386 12.1511 14.1994 12.0415C13.9605 11.932 13.8388 12.1107 13.8388 12.1107C13.8388 12.1107 13.486 12.5566 13.3724 12.7024C13.363 12.7145 13.354 12.7264 13.3452 12.7381C13.2468 12.8683 13.1697 12.9702 12.8982 12.8808C12.6022 12.7834 12.0087 12.4639 11.5237 12.0294C11.0391 11.595 10.6684 11.0201 10.5632 10.8458C10.4578 10.6712 10.5794 10.562 10.5794 10.562C10.5794 10.562 10.8864 10.2082 11.0333 10.0187C11.1771 9.83334 11.0925 9.62678 11.0559 9.5377C11.0551 9.53575 11.0536 9.53202 11.0536 9.53202C11.0186 9.44684 10.5468 8.3386 10.4779 8.18234C10.4092 8.02594 10.2592 8 10.2592 8H9.69973C9.59967 8 9.40786 8.12164 9.40786 8.12164C8.83294 8.48961 8.73552 9.34836 8.71867 9.53373C8.70182 9.71909 8.68497 10.1125 8.98829 10.7753C9.29161 11.4379 10.0331 12.3368 10.9488 13.1908C11.8315 14.0141 13.1685 14.385 13.6436 14.5168C13.6612 14.5217 13.6776 14.5263 13.6928 14.5305C14.1175 14.6491 15.0143 14.4385 15.4359 13.9831C15.8133 13.5759 15.7749 13.1541 15.7569 12.9568Z"
-          fill="white"
-        />
-      </svg>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
-          fill="#333839"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M5.43201 11.8734C8.93026 10.3493 11.263 9.34452 12.4301 8.85905C15.7627 7.47294 16.4551 7.23216 16.9065 7.22421C17.0058 7.22246 17.2277 7.24706 17.3715 7.36372C17.4929 7.46223 17.5263 7.5953 17.5423 7.6887C17.5583 7.78209 17.5782 7.99485 17.5623 8.16109C17.3817 10.0586 16.6003 14.6633 16.2028 16.7885C16.0346 17.6877 15.7034 17.9892 15.3827 18.0187C14.6858 18.0829 14.1567 17.5582 13.4817 17.1158C12.4256 16.4235 11.8289 15.9925 10.8037 15.3169C9.61896 14.5362 10.387 14.107 11.0622 13.4057C11.2389 13.2222 14.3093 10.4295 14.3687 10.1761C14.3762 10.1444 14.3831 10.0263 14.3129 9.96396C14.2427 9.9016 14.1392 9.92293 14.0644 9.93989C13.9585 9.96393 12.2713 11.0791 9.00276 13.2855C8.52385 13.6143 8.09007 13.7745 7.70141 13.7661C7.27295 13.7569 6.44876 13.5239 5.83606 13.3247C5.08456 13.0804 4.48728 12.9513 4.53929 12.5364C4.56638 12.3203 4.86395 12.0993 5.43201 11.8734Z"
-          fill="white"
-        />
-      </svg>
+      <a href="https://wa.me/77059251301" target="_blank">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12Z"
+            fill="#333839"
+          />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M5 11.5065C5 7.91278 8.11522 5 11.958 5C15.8008 5 18.916 7.91278 18.916 11.5065C18.916 15.1003 15.8008 18.0131 11.958 18.0131C11.2635 18.0131 10.5926 17.9179 9.9597 17.7405L7.58508 19.0578V16.5675C6.00817 15.3749 5 13.5509 5 11.5065ZM15.7569 12.9568C15.7548 12.9336 15.7529 12.9136 15.7521 12.897C15.7441 12.7389 15.6021 12.7147 15.6021 12.7147C15.6021 12.7147 14.4386 12.1511 14.1994 12.0415C13.9605 11.932 13.8388 12.1107 13.8388 12.1107C13.8388 12.1107 13.486 12.5566 13.3724 12.7024C13.363 12.7145 13.354 12.7264 13.3452 12.7381C13.2468 12.8683 13.1697 12.9702 12.8982 12.8808C12.6022 12.7834 12.0087 12.4639 11.5237 12.0294C11.0391 11.595 10.6684 11.0201 10.5632 10.8458C10.4578 10.6712 10.5794 10.562 10.5794 10.562C10.5794 10.562 10.8864 10.2082 11.0333 10.0187C11.1771 9.83334 11.0925 9.62678 11.0559 9.5377C11.0551 9.53575 11.0536 9.53202 11.0536 9.53202C11.0186 9.44684 10.5468 8.3386 10.4779 8.18234C10.4092 8.02594 10.2592 8 10.2592 8H9.69973C9.59967 8 9.40786 8.12164 9.40786 8.12164C8.83294 8.48961 8.73552 9.34836 8.71867 9.53373C8.70182 9.71909 8.68497 10.1125 8.98829 10.7753C9.29161 11.4379 10.0331 12.3368 10.9488 13.1908C11.8315 14.0141 13.1685 14.385 13.6436 14.5168C13.6612 14.5217 13.6776 14.5263 13.6928 14.5305C14.1175 14.6491 15.0143 14.4385 15.4359 13.9831C15.8133 13.5759 15.7749 13.1541 15.7569 12.9568Z"
+            fill="white"
+          />
+        </svg>
+      </a>
+      <a href="https://t.me//quanysh_bot" target="_blank">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+            fill="#333839"
+          />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M5.43201 11.8734C8.93026 10.3493 11.263 9.34452 12.4301 8.85905C15.7627 7.47294 16.4551 7.23216 16.9065 7.22421C17.0058 7.22246 17.2277 7.24706 17.3715 7.36372C17.4929 7.46223 17.5263 7.5953 17.5423 7.6887C17.5583 7.78209 17.5782 7.99485 17.5623 8.16109C17.3817 10.0586 16.6003 14.6633 16.2028 16.7885C16.0346 17.6877 15.7034 17.9892 15.3827 18.0187C14.6858 18.0829 14.1567 17.5582 13.4817 17.1158C12.4256 16.4235 11.8289 15.9925 10.8037 15.3169C9.61896 14.5362 10.387 14.107 11.0622 13.4057C11.2389 13.2222 14.3093 10.4295 14.3687 10.1761C14.3762 10.1444 14.3831 10.0263 14.3129 9.96396C14.2427 9.9016 14.1392 9.92293 14.0644 9.93989C13.9585 9.96393 12.2713 11.0791 9.00276 13.2855C8.52385 13.6143 8.09007 13.7745 7.70141 13.7661C7.27295 13.7569 6.44876 13.5239 5.83606 13.3247C5.08456 13.0804 4.48728 12.9513 4.53929 12.5364C4.56638 12.3203 4.86395 12.0993 5.43201 11.8734Z"
+            fill="white"
+          />
+        </svg>
+      </a>
     </p>
-    <p className="flex items-center gap-1 text-xl font-semibold">
+    <a
+      href="mailto:mail@hcsbk.kz"
+      className="flex items-center gap-1 text-xl font-semibold !text-black"
+    >
       mail@hcsbk.kz
       <span className="text-sm font-normal text-[#7A7E81]">
         для вопросов и предложений
       </span>
-    </p>
+    </a>
   </div>
 );
 
@@ -173,7 +202,7 @@ const BaiterekLogo = () => (
 
 export const Footer = () => {
   return (
-    <footer className="flex flex-col items-center">
+    <footer className="flex flex-col items-center" id="footer">
       <div className="flex w-full max-w-[1280px] justify-between px-10 py-12">
         <div className="flex gap-20">
           <MobileAppLinks />
@@ -187,10 +216,10 @@ export const Footer = () => {
             © 2024 АО «Отбасы банк»
           </div>
           <div>
-            <div className="flex items-center gap-5">
+            <Link to={"/"} className="flex items-center gap-5">
               <BaiterekLogo />
               <img src={LogoIcon} alt="logo" />
-            </div>
+            </Link>
           </div>
         </div>
       </div>

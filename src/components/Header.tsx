@@ -1,25 +1,31 @@
 import { BellFilled, HomeOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LogoIcon from "../assets/logo.svg";
 
 const links = [
   {
     label: "Постановление на очередь жилья",
-    href: "#",
+    href: "/sign",
   },
   {
-    label: "Ипотека",
-    href: "#",
+    label: "Доступные квартиры",
+    href: "/apartments",
   },
   {
     label: "Отбасы инфо",
-    href: "#",
+    href: "https://hcsbk.kz/ru/faq/",
   },
   {
     label: "Контакты",
-    href: "#",
+    href: "#footer",
+    onClick: () => {
+      const footer = document.getElementById("footer");
+      if (footer) {
+        footer.scrollIntoView({ behavior: "smooth" });
+      }
+    },
   },
 ];
 
@@ -67,6 +73,7 @@ function getIsAuth() {
 export const Header = () => {
   const [isAuth, setIsAuth] = useState(getIsAuth());
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsAuth(getIsAuth());
@@ -76,11 +83,18 @@ export const Header = () => {
     <header className="flex flex-col items-center">
       <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-2 px-10 pb-2 pt-4">
         <div className="flex items-center gap-8">
-          <div className="flex items-center gap-2 text-[#7A7E81]">
+          <a
+            href="https://2gis.kz/almaty/search/%D0%9E%D1%82%D0%B1%D0%B0%D1%81%D1%8B%20%D0%B1%D0%B0%D0%BD%D0%BA%20%D0%BE%D1%82%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5"
+            className="flex items-center gap-2 !text-[#7A7E81]"
+            target="_blank"
+          >
             <PointIcon />
             Местоположение
-          </div>
-          <div className="flex items-center gap-2 rounded-lg bg-[#E7F5EE] px-4 py-2 font-medium text-[#008F91]">
+          </a>
+          <div
+            className="flex cursor-pointer items-center gap-2 rounded-lg bg-[#E7F5EE] px-4 py-2 font-medium text-[#008F91]"
+            onClick={() => navigate("/operations")}
+          >
             <HomeOutlined style={{ fontSize: 24, color: "#008F91" }} />
             Центр обеспечения жильем
           </div>
@@ -102,7 +116,11 @@ export const Header = () => {
             </Link>
             {links.map((link) => (
               <div key={link.label}>
-                <Link className="!text-black" to={link.href}>
+                <Link
+                  className="!text-black hover:!underline"
+                  to={link.href}
+                  onClick={link.onClick}
+                >
                   {link.label}
                 </Link>
               </div>
