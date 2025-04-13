@@ -1,5 +1,6 @@
 import { Button, Select } from "antd";
 import { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ApartmentCardProps {
   apartmentTypes: {
@@ -32,6 +33,7 @@ const formatPrice = (price: number) => {
 
 export const ApartmentCard: FC<ApartmentCardProps> = ({ apartmentTypes }) => {
   const [selectedApartment, setSelectedApartment] = useState(apartmentTypes[0]);
+  const navigate = useNavigate();
   return (
     <div className="h-max w-[360px] min-w-[340px] rounded-lg border border-[#D1D4D7] p-5">
       <Select
@@ -68,7 +70,12 @@ export const ApartmentCard: FC<ApartmentCardProps> = ({ apartmentTypes }) => {
         />
       </div>
       <img src={selectedApartment.schemeUrl} alt="scheme" />
-      <Button className="mt-8 w-full" type="primary" size="large">
+      <Button
+        className="mt-8 w-full"
+        type="primary"
+        size="large"
+        onClick={() => navigate("/sign")}
+      >
         Подать заявку
       </Button>
     </div>
